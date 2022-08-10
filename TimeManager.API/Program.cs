@@ -1,4 +1,5 @@
 using TimeManager.API.Data;
+using TimeManager.API.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 
 var app = builder.Build();
+
+DatabaseManagerService.MigrationInitialization(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
