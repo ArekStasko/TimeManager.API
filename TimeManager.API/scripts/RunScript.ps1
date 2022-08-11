@@ -47,8 +47,9 @@ if(($args[0] -eq "Full") -or ($args[0] -eq "Latest")){
 
 Import-Module SqlServer -ErrorAction Stop
 
-$SQLServer = "DESKTOP-59AMNOB"
-$Database = 'TimeManager'
+$SQLServer = "mssql-server"
+$Database = 'TimeManagerDB'
+$Password = 'Password.1234'
 $Location = Get-Location
 
 try
@@ -70,7 +71,7 @@ foreach($scriptSet in $Data.script.PSObject.Properties){
         $scriptFileVersion = $scriptFile.Substring(1, [Math]::Min($scriptFile.Length, 5))
 
         if(($args[0] -eq "Latest") -and ($scriptFileVersion -eq $version)){
-        Invoke-Sqlcmd -ServerInstance $SQLServer -Database $Database -InputFile $Location$scriptFile -Verbose *> $Location"\Logs\ScriptLogs.log"   
+        Invoke-Sqlcmd -ServerInstance $SQLServer -Database $Database -Username 'sa' -Password $Password -InputFile $Location$scriptFile -Verbose *> $Location"\Logs\ScriptLogs.log"   
         continue 
         }
 
