@@ -2,7 +2,6 @@
 using TimeManager.API.Data.Response;
 using TimeManager.API.Data;
 using TimeManager.API.Processors.vwActivityCategoryProcessor;
-using TimeManager.API.Authentication;
 
 
 namespace TimeManager.API.Controllers.vwActivityCategoryControllers

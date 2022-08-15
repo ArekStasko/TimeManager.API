@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.ComponentModel.DataAnnotations;
 
-namespace TimeManager.API.Authentication
+namespace TimeManager.API.Data
 {
     public class Token
     {

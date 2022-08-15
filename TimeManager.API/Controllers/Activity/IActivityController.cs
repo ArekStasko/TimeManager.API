@@ -1,7 +1,6 @@
 ﻿using TimeManager.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using TimeManager.API.Data.Response;
-using TimeManager.API.Authentication;
 
 
 namespace TimeManager.API.Controllers.vwActivityCategoryControllers

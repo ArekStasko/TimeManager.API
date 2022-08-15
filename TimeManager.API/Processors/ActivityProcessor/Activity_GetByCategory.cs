@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
+using TimeManager.API.Services.Validation;
 
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class vwActivityCategory_GetByCategory : Auth_Processor, IvwActivityCategory_GetByCategory
+    public class vwActivityCategory_GetByCategory : Processor, IvwActivityCategory_GetByCategory
     {
         public vwActivityCategory_GetByCategory(DataContext context) : base(context) { }
 
@@ -16,7 +17,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 
             try
             {
-                if (!IsAuth(request.Token)) throw new Exception("You have to be logged in");
+                if (!Auth.IsAuth(request.Token)) throw new Exception("You have to be logged in");
                 var activities = await _context.vwActivityCategory.ToListAsync();
                 activities = activities.Where(activity => activity.CategoryId == request.Data).ToList();
 

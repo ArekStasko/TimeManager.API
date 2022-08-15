@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Processors.CategoryProcessor;
 using TimeManager.API.Data.Response;
-using TimeManager.API.Authentication;
 
 namespace TimeManager.API.Controllers.CategoryControllers
 {

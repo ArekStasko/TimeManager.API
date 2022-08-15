@@ -1,5 +1,4 @@
-﻿using TimeManager.API.Authentication;
-
+﻿
 namespace TimeManager.API.Data
 {
     public class Request<T> : IRequest<T>

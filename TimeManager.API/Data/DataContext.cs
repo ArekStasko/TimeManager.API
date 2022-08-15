@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimeManager.API.Authentication;
 
 namespace TimeManager.API.Data
 {
@@ -7,8 +6,6 @@ namespace TimeManager.API.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Token> Tokens { get; set; }
-        public DbSet<TokenKey> TokenKey { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<vwActivityCategory> vwActivityCategory { get; set; }
         public DbSet<Category> Categories { get; set; }

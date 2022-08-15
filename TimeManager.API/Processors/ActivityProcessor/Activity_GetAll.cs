@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
-using TimeManager.API.Authentication;
+using TimeManager.API.Services.Validation;
+
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class vwActivityCategory_GetAll : Auth_Processor, IvwActivityCategory_GetAll
+    public class vwActivityCategory_GetAll : Processor, IvwActivityCategory_GetAll
     {
         public vwActivityCategory_GetAll(DataContext context) : base(context) { }
         public async Task<ActionResult<Response<List<vwActivityCategory>>>> Get(Token token)
@@ -14,7 +15,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
             Response<List<vwActivityCategory>> response;
             try
             {
-                if (!IsAuth(token)) throw new Exception("You have to be logged in");
+                if (!Auth.IsAuth(token)) throw new Exception("You have to be logged in");
                 var activities = _context.vwActivityCategory.ToList();
                 activities = activities.Where(a => a.UserId == token.userId).ToList();
                 response = new Response<List<vwActivityCategory>>(activities);
