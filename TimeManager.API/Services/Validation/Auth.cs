@@ -12,7 +12,7 @@ namespace TimeManager.API.Services.Validation
 
         public static bool IsAuth(Token token)
         {            
-            string endpoint = "http://timemanager.idp:8080/api/Auth/IsAuth/isauth";
+            string endpoint = "http://timemanager.idp:80/api/Auth/IsAuth/isauth";
             var client = new RestClient(endpoint);
             var request = new RestRequest();
 
