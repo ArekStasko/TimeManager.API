@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using Newtonsoft.Json;
 
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
@@ -16,9 +17,10 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
             try
             {
                 if (!Auth.IsAuth(token)) throw new Exception("You have to be logged in");
+
                 var activities = _context.vwActivityCategory.ToList();
                 activities = activities.Where(a => a.UserId == token.userId).ToList();
-                response = new Response<List<vwActivityCategory>>(activities);
+                response = new Response<List<vwActivityCategory>>(activities);   
                 return response;
             }
             catch (Exception ex)
