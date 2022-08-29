@@ -21,7 +21,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 var cat = _context.Categories.Single(c => c.Id == request.Data.Id);
                 _context.Categories.Remove(cat);
 
-                ICategory_Add Category_Add = new Category_Add(_context);
+                ICategory_Add Category_Add = CategoryProcessor_Factory.GetCategory_Add(_context);
                 return await Category_Add.Post(request);
             }
             catch (Exception ex)

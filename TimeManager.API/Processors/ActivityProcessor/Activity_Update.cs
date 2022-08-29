@@ -22,7 +22,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 var act = _context.Activities.Single(act => act.Id == request.Data.Id);
                 _context.Activities.Remove(act);
 
-                IActivity_Add activity_Add = new Activity_Add(_context);
+                IActivity_Add activity_Add = ActivityProcessor_Factory.GetActivity_Add(_context);
                 return await activity_Add.Post(request);
             }
             catch (Exception ex)

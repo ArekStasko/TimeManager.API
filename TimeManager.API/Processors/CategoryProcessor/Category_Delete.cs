@@ -20,7 +20,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
 
-                ICategory_Get Category_Get = new Category_Get(_context);
+                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context);
                 return await Category_Get.Get(request.Token);
             }
             catch (Exception ex)

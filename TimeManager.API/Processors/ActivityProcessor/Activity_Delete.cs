@@ -22,7 +22,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 _context.Activities.Remove(activity);
                 _context.SaveChanges();
 
-                IvwActivityCategory_GetAll vwActivityCategory_GetAll = new vwActivityCategory_GetAll(_context);
+                IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context);
                 return await vwActivityCategory_GetAll.Get(request.Token);
             }
             catch (Exception ex)
