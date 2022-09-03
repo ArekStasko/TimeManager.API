@@ -11,9 +11,11 @@ namespace TimeManager.API.Controllers.vwActivityCategoryControllers
     public class ActivityController : ControllerBase, IActivityController
     {
         private readonly DataContext _context;
-        public ActivityController(DataContext context)
+        private readonly ILogger<ActivityController> _logger;
+        public ActivityController(DataContext context, ILogger<ActivityController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [HttpPost(Name = "GetActivities")]
@@ -21,6 +23,7 @@ namespace TimeManager.API.Controllers.vwActivityCategoryControllers
         {
             IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context);
             var activities = await vwActivityCategory_GetAll.Get(token);
+            _logger.LogInformation("Getting data from db");
             return Ok(activities);
         }
 

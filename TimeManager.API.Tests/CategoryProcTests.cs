@@ -15,28 +15,28 @@ namespace TimeManager.API.Tests
         [Test]
         public void CategoryAdd_Should_AddCategory()
         {
-            var processor = CategoryProcessor_Factory.GetCategory_Add();
+           // var processor = CategoryProcessor_Factory.GetCategory_Add();
             Assert.Pass();
         }
 
         [Test]
         public void CategoryDelete_Should_DeleteCategory()
         {
-            var processor = CategoryProcessor_Factory.GetCategory_Delete();
+            //var processor = CategoryProcessor_Factory.GetCategory_Delete();
             Assert.Pass();
         }
 
         [Test]
         public void CategoryGet_Should_ReturnCategory()
         {
-            var processor = CategoryProcessor_Factory.GetCategory_Get();
+           // var processor = CategoryProcessor_Factory.GetCategory_Get();
             Assert.Pass();
         }
 
         [Test]
         public void CategoryUpdate_Should_UpdateCategory()
         {
-            var processor = CategoryProcessor_Factory.GetCategory_Update();
+            //var processor = CategoryProcessor_Factory.GetCategory_Update();
             Assert.Pass();
         }
     }

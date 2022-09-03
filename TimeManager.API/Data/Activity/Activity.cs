@@ -13,5 +13,6 @@ namespace TimeManager.API.Data
         public DateTime DateCompleted { get; set; }
         public DateTime Deadline { get; set; }
         public int UserId { get; set; }
+        public int Priority { get; set; }
     }
 }
