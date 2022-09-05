@@ -19,12 +19,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 
-var logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .CreateLogger();
-builder.Logging.ClearProviders();
-builder.Logging.AddSerilog();
+builder.Host.UseSerilog((ctx, lc) =>
+{
+    lc.WriteTo.Console()
+      .WriteTo.File("timemanagerAPI-.txt", rollingInterval: RollingInterval.Day);
+});
 
 var app = builder.Build();
 
