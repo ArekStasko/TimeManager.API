@@ -30,7 +30,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
             }
             catch (Exception ex)
             {
-                response = new Response<List<vwActivityCategory>>(ex, "Whoops, Something went wrong");
+                response = new Response<List<vwActivityCategory>>(ex);
                 return response;
             }
 

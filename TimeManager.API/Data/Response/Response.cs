@@ -7,6 +7,6 @@
 
         public Response() {}
         public Response(T data) => Data = data;
-        public Response(Exception ex, string title) => Exception = new ApiException(ex, title);
+        public Response(Exception ex) => Exception = new ApiException(ex);
     }
 }

@@ -24,7 +24,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
             }
             catch (Exception ex)
             {
-                response = new Response<List<vwCategory>>(ex, "Whoops, something went wrong");
+                response = new Response<List<vwCategory>>(ex);
                 return response;
             }
         }

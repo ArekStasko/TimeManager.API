@@ -11,14 +11,22 @@ namespace TimeManager.API.Services.Validation
     {
 
         public static bool IsAuth(Token token)
-        {            
-            string endpoint = "http://timemanager.idp:80/api/Auth/IsAuth/isauth";
-            var client = new RestClient(endpoint);
-            var request = new RestRequest();
+        {
+            try
+            {
+                string endpoint = "http://timemanager.idp:80/api/Auth/IsAuth/isauth";
+                var client = new RestClient(endpoint);
+                var request = new RestRequest();
 
-            request.AddJsonBody(token);
-            Response<bool> result = client.Post<Response<bool>>(request);
-            return result.Data;
+                request.AddJsonBody(token);
+                Response<bool> result = client.Post<Response<bool>>(request);
+                return result.Data;
+            }
+            catch (Exception ex)
+            {
+                
+                return false;
+            }
         }
 
     }
