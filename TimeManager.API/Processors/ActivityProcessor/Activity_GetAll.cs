@@ -4,13 +4,14 @@ using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
 using Newtonsoft.Json;
+using TimeManager.API.Controllers.vwActivityCategoryControllers;
 
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class vwActivityCategory_GetAll : Processor, IvwActivityCategory_GetAll
+    public class vwActivityCategory_GetAll : Processor<ActivityController>, IvwActivityCategory_GetAll
     {
-        public vwActivityCategory_GetAll(DataContext context) : base(context) { }
+        public vwActivityCategory_GetAll(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
         public async Task<ActionResult<Response<List<vwActivityCategory>>>> Get(Token token)
         {
             Response<List<vwActivityCategory>> response;

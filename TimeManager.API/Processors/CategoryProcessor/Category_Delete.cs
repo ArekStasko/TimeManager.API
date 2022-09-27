@@ -2,12 +2,13 @@
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.CategoryControllers;
 
 namespace TimeManager.API.Processors.CategoryProcessor
 {
-    public class Category_Delete : Processor, ICategory_Delete
+    public class Category_Delete : Processor<CategoryController>, ICategory_Delete
     {
-        public Category_Delete(DataContext context) : base(context) { }
+        public Category_Delete(DataContext context, ILogger<CategoryController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<List<vwCategory>>>> Delete(Request<int> request)
         {
@@ -20,7 +21,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
 
-                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context);
+                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
                 return await Category_Get.Get(request.Token);
             }
             catch (Exception ex)

@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.vwActivityCategoryControllers;
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class vwActivityCategory_Update : Processor, IActivity_Update
+    public class vwActivityCategory_Update : Processor<ActivityController>, IActivity_Update
     {
-        public vwActivityCategory_Update(DataContext context) : base(context) { }
+        public vwActivityCategory_Update(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<List<vwActivityCategory>>>> Update(Request<Activity> request)
         {
@@ -22,7 +23,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 var act = _context.Activities.Single(act => act.Id == request.Data.Id);
                 _context.Activities.Remove(act);
 
-                IActivity_Add activity_Add = ActivityProcessor_Factory.GetActivity_Add(_context);
+                IActivity_Add activity_Add = ActivityProcessor_Factory.GetActivity_Add(_context, _logger);
                 return await activity_Add.Post(request);
             }
             catch (Exception ex)

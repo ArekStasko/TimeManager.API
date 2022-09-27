@@ -4,14 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.vwActivityCategoryControllers;
 
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class Activity_Add : Processor, IActivity_Add
+    public class Activity_Add : Processor<ActivityController>, IActivity_Add
     {
 
-        public Activity_Add(DataContext context) : base(context) { }
+        public Activity_Add(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<List<vwActivityCategory>>>> Post(Request<Activity> request)
         {
@@ -25,7 +26,7 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 _context.Activities.Add(activity);
                 _context.SaveChanges();
 
-                IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context);
+                IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context, _logger);
                 return await vwActivityCategory_GetAll.Get(request.Token);
             }
             catch (Exception ex)

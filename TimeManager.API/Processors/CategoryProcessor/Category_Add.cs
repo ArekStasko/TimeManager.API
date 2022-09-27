@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.CategoryControllers;
 
 namespace TimeManager.API.Processors.CategoryProcessor
 {
-    public class Category_Add : Processor, ICategory_Add
+    public class Category_Add : Processor<CategoryController>, ICategory_Add
     {
-        public Category_Add(DataContext context) : base(context) { }
+        public Category_Add(DataContext context, ILogger<CategoryController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<List<vwCategory>>>> Post(Request<Category> request)
         {
@@ -21,7 +22,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 _context.Categories.Add(request.Data);
                 _context.SaveChanges();
 
-                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context);
+                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
                 return await Category_Get.Get(request.Token);
             }
             catch (Exception ex)

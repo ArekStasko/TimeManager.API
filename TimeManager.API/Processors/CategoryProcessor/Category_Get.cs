@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.CategoryControllers;
 
 namespace TimeManager.API.Processors.CategoryProcessor
 {
-    public class Category_Get : Processor, ICategory_Get
+    public class Category_Get : Processor<CategoryController>, ICategory_Get
     {
-        public Category_Get(DataContext context) : base(context) {}
+        public Category_Get(DataContext context, ILogger<CategoryController> logger) : base(context, logger) {}
 
         public async Task<ActionResult<Response<List<vwCategory>>>> Get(Token token)
         {

@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
+using TimeManager.API.Controllers.vwActivityCategoryControllers;
 
 
 namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 {
-    public class vwActivityCategory_GetById : Processor, IvwActivityCategory_GetById
+    public class vwActivityCategory_GetById : Processor<ActivityController>, IvwActivityCategory_GetById
     {
-        public vwActivityCategory_GetById(DataContext context) : base(context) { }
+        public vwActivityCategory_GetById(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<vwActivityCategory>>> Get(Request<int> request)
         {
