@@ -24,10 +24,12 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 _context.SaveChanges();
 
                 IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context, _logger);
+                _logger.LogInformation("Activity succesfully deleted");
                 return await vwActivityCategory_GetAll.Get(request.Token);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwActivityCategory>>(ex);
                 return response;
             }

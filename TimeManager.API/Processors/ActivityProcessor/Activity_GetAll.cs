@@ -21,11 +21,13 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
 
                 var activities = _context.vwActivityCategory.ToList();
                 activities = activities.Where(a => a.UserId == token.userId).ToList();
-                response = new Response<List<vwActivityCategory>>(activities);   
+                response = new Response<List<vwActivityCategory>>(activities);
+                _logger.LogInformation("Successfully gotten activities");
                 return response;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwActivityCategory>>(ex);
                 return response;
             }

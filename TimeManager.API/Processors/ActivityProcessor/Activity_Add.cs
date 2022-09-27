@@ -27,11 +27,13 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 _context.SaveChanges();
 
                 IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context, _logger);
+                _logger.LogInformation("User succesfully added");
                 return await vwActivityCategory_GetAll.Get(request.Token);
             }
             catch (Exception ex)
             {
                 response = new Response<List<vwActivityCategory>>(ex);
+                _logger.LogError(ex.Message);
                 return response;
             }
 

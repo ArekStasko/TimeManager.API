@@ -24,10 +24,12 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 _context.Activities.Remove(act);
 
                 IActivity_Add activity_Add = ActivityProcessor_Factory.GetActivity_Add(_context, _logger);
+                _logger.LogInformation("Successfully updated activity");
                 return await activity_Add.Post(request);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwActivityCategory>>(ex);
                 return response;
             }

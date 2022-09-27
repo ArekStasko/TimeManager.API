@@ -21,10 +21,12 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 var categories = await _context.vwCategories.ToListAsync();
                 response = new Response<List<vwCategory>>(categories);
 
+                _logger.LogInformation("Successfully gotten category");
                 return response;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwCategory>>(ex);
                 return response;
             }

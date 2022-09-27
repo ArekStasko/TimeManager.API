@@ -23,10 +23,12 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 _context.Categories.Remove(cat);
 
                 ICategory_Add Category_Add = CategoryProcessor_Factory.GetCategory_Add(_context, _logger);
+                _logger.LogInformation("Successfully updated category");
                 return await Category_Add.Post(request);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwCategory>>(ex);
                 return response;
             }

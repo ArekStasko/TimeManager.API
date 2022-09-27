@@ -22,10 +22,12 @@ namespace TimeManager.API.Processors.CategoryProcessor
                 _context.SaveChanges();
 
                 ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
+                _logger.LogInformation("Successfully deleted category");
                 return await Category_Get.Get(request.Token);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwCategory>>(ex);
                 return response;
             }

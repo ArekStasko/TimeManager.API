@@ -23,10 +23,12 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 activities = activities.Where(activity => activity.CategoryId == request.Data).ToList();
 
                 response = new Response<List<vwActivityCategory>>(activities);
+                _logger.LogInformation("Successfully gotten category by id");
                 return response;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<List<vwActivityCategory>>(ex);
                 return response;
             }

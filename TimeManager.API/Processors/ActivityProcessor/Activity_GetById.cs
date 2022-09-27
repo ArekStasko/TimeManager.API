@@ -23,10 +23,12 @@ namespace TimeManager.API.Processors.vwActivityCategoryProcessor
                 var activity = activities.Single(act => act.Id == request.Data);
                 
                 response = new Response<vwActivityCategory>(activity);
+                _logger.LogInformation("Successfully gotten activity by id");
                 return response;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 response = new Response<vwActivityCategory>(ex);
                 return response;
             }
