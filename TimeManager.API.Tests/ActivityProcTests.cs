@@ -2,6 +2,7 @@ using NUnit.Framework;
 using FluentAssertions;
 using TimeManager.API.Data;
 using TimeManager.API.Processors.vwActivityCategoryProcessor;
+using Telerik.JustMock;
 
 namespace TimeManager.API.Tests
 {
@@ -15,6 +16,8 @@ namespace TimeManager.API.Tests
         [Test]
         public void ActivityAdd_Should_AddActivity()
         {
+            var dbContext = new DataContext();
+            Mock.Arrange(()=> dbContext.Activities).Returns(dbContext.Activities);
            // var processor = ActivityProcessor_Factory.GetActivity_Add();
             Assert.Pass();
         }
