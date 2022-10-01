@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 
-namespace TimeManager.API.Processors.vwActivityCategoryProcessor
+namespace TimeManager.API.Processors.ActivityProcessor
 {
     public interface IvwActivityCategory_GetById
     {

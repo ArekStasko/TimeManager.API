@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Data;
-using TimeManager.API.Processors.vwActivityCategoryProcessor;
-using TimeManager.API.Controllers.vwActivityCategoryControllers;
+using TimeManager.API.Processors.ActivityProcessor;
 
 
-namespace TimeManager.API.Controllers.vwActivityCategoryControllers
+namespace TimeManager.API.Controllers.ActivityControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

@@ -12,8 +12,8 @@ namespace TimeManager.API.Tests
     {
         public TestTMDbContext()
         {
-            this.Activities = new TestActivityDbSet();
-            this.Categories = new TestCategoryDbSet();
+            Activities = new TestActivityDbSet();
+            Categories = new TestCategoryDbSet();
         }
 
         public DbSet<Activity> Activities { get; set; }
@@ -21,6 +21,10 @@ namespace TimeManager.API.Tests
         public DbSet<Category> Categories { get; set; }
         public DbSet<vwCategory> vwCategories { get; set; }
 
-
+        public int SaveChanges()
+        {
+            return 0;
+        }
+        public void Dispose() { }
     }
 }

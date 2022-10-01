@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using FluentAssertions;
 using TimeManager.API.Data;
-using TimeManager.API.Processors.vwActivityCategoryProcessor;
+using TimeManager.API.Processors.ActivityProcessor;
 
 namespace TimeManager.API.Tests
 {

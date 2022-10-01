@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
-using TimeManager.API.Controllers.vwActivityCategoryControllers;
+using TimeManager.API.Controllers.ActivityControllers;
 
 
-namespace TimeManager.API.Processors.vwActivityCategoryProcessor
+namespace TimeManager.API.Processors.ActivityProcessor
 {
     public class Activity_Add : Processor<ActivityController>, IActivity_Add
     {

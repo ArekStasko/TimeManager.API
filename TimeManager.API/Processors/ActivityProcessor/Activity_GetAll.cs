@@ -4,10 +4,10 @@ using TimeManager.API.Data;
 using TimeManager.API.Data.Response;
 using TimeManager.API.Services.Validation;
 using Newtonsoft.Json;
-using TimeManager.API.Controllers.vwActivityCategoryControllers;
+using TimeManager.API.Controllers.ActivityControllers;
 
 
-namespace TimeManager.API.Processors.vwActivityCategoryProcessor
+namespace TimeManager.API.Processors.ActivityProcessor
 {
     public class vwActivityCategory_GetAll : Processor<ActivityController>, IvwActivityCategory_GetAll
     {

@@ -7,7 +7,7 @@ using TimeManager.API.Data;
 
 namespace TimeManager.API.Tests
 {
-    internal class TestCategoryDbSet : TestDbSet<Category>
+    public class TestCategoryDbSet : TestDbSet<Category>
     {
         public override Category Find(params object[] keyValues)
         {

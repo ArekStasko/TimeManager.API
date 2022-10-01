@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeManager.API.Data.Response;
 
 
-namespace TimeManager.API.Controllers.vwActivityCategoryControllers
+namespace TimeManager.API.Controllers.ActivityControllers
 {
     public interface IActivityController
     {

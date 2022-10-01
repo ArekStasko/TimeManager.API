@@ -1,7 +1,7 @@
 ﻿using TimeManager.API.Data;
-using TimeManager.API.Controllers.vwActivityCategoryControllers;
+using TimeManager.API.Controllers.ActivityControllers;
 
-namespace TimeManager.API.Processors.vwActivityCategoryProcessor
+namespace TimeManager.API.Processors.ActivityProcessor
 {
     public static class ActivityProcessor_Factory
     {
