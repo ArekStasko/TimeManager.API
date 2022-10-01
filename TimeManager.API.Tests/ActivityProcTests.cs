@@ -1,12 +1,19 @@
+using System;
+using TimeManager.API.Processors.ActivityProcessor;
 using NUnit.Framework;
 using FluentAssertions;
 using TimeManager.API.Data;
-using TimeManager.API.Processors.ActivityProcessor;
+using Moq;
+using Microsoft.EntityFrameworkCore;
+
+// All tests will be ready after completing api gateway and base defactor
 
 namespace TimeManager.API.Tests
 {
     public class ActivityProcTests
     {
+        Mock<DataContext> mockDbContext = new Mock<DataContext>();
+
         [SetUp]
         public void Setup()
         {
@@ -15,42 +22,144 @@ namespace TimeManager.API.Tests
         [Test]
         public void ActivityAdd_Should_AddActivity()
         {
-           // var processor = ActivityProcessor_Factory.GetActivity_Add();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetActivity_Add(mockDbContext.Object, null);
+            var result = processor.Post(activity);
             Assert.Pass();
         }
 
         [Test]
         public void ActivityDelete_Should_DeleteActivity()
         {
-            //var processor = ActivityProcessor_Factory.GetActivity_Delete();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetActivity_Delete(mockDbContext.Object, null);
+            var result = processor.Delete(activity);
             Assert.Pass();
         }
 
         [Test]
         public void ActivityGetAll_Should_ReturnAllActivities()
         {
-            //var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetAll();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(mockDbContext.Object, null);
+            var result = processor.Get();
             Assert.Pass();
         }
 
         [Test]
         public void ActivityGetByCategory_Should_ReturnActivitiesByCategory()
         {
-            //var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetByCategory();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetByCategory(mockDbContext.Object, null);
+            var result = processor.Get()
             Assert.Pass();
         }
 
         [Test]
         public void ActivityById_Should_ReturnActivityWithSpecificId()
         {
-            //var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetById();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetById(mockDbContext.Object, null);
+            var result = processor.Get();
             Assert.Pass();
         }
 
         [Test]
         public void ActivityUpdate_Should_UpdateActivity()
         {
-            //var processor = ActivityProcessor_Factory.GetActivity_Update();
+            var activityMock = new Mock<DbSet<Activity>>();
+            var activity = new Activity()
+            {
+                Id = 1,
+                Name = "TestName",
+                Description = "Test Description",
+                CategoryId = 1,
+                DateAdded = DateTime.Now,
+                DateCompleted = DateTime.Now,
+                Deadline = DateTime.Now,
+                UserId = 1,
+                Priority = 1,
+            };
+
+            //activityMock.Setup();
+
+            var processor = ActivityProcessor_Factory.GetActivity_Update(mockDbContext.Object, null);
+            var result = processor.Update();
             Assert.Pass();
         }
     }
