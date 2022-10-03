@@ -8,28 +8,28 @@ using TimeManager.API.Controllers.ActivityControllers;
 
 namespace TimeManager.API.Processors.ActivityProcessor
 {
-    public class vwActivityCategory_GetByCategory : Processor<ActivityController>, IvwActivityCategory_GetByCategory
+    public class Activity_GetByCategory : Processor<ActivityController>, IActivity_GetByCategory
     {
-        public vwActivityCategory_GetByCategory(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
+        public Activity_GetByCategory(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<vwActivityCategory>>>> Get(Request<int> request)
+        public async Task<ActionResult<Response<List<Activity>>>> Get(Request<int> request)
         {
-            Response<List<vwActivityCategory>> response;
+            Response<List<Activity>> response;
 
             try
             {
                 if (!Auth.IsAuth(request.Token)) throw new Exception("You have to be logged in");
-                var activities = await _context.vwActivityCategory.ToListAsync();
+                var activities = await _context.Activities.ToListAsync();
                 activities = activities.Where(activity => activity.CategoryId == request.Data).ToList();
 
-                response = new Response<List<vwActivityCategory>>(activities);
+                response = new Response<List<Activity>>(activities);
                 _logger.LogInformation("Successfully gotten category by id");
                 return response;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwActivityCategory>>(ex);
+                response = new Response<List<Activity>>(ex);
                 return response;
             }
         }

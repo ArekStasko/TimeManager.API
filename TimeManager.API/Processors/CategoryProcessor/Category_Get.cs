@@ -11,15 +11,15 @@ namespace TimeManager.API.Processors.CategoryProcessor
     {
         public Category_Get(DataContext context, ILogger<CategoryController> logger) : base(context, logger) {}
 
-        public async Task<ActionResult<Response<List<vwCategory>>>> Get(Token token)
+        public async Task<ActionResult<Response<List<Category>>>> Get(Token token)
         {
-            Response<List<vwCategory>> response;
+            Response<List<Category>> response;
             try
             {
                 if (!Auth.IsAuth(token)) throw new Exception("You have to be logged in");
 
-                var categories = await _context.vwCategories.ToListAsync();
-                response = new Response<List<vwCategory>>(categories);
+                var categories = await _context.Categories.ToListAsync();
+                response = new Response<List<Category>>(categories);
 
                 _logger.LogInformation("Successfully gotten category");
                 return response;
@@ -27,7 +27,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwCategory>>(ex);
+                response = new Response<List<Category>>(ex);
                 return response;
             }
         }

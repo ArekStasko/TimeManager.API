@@ -10,9 +10,9 @@ namespace TimeManager.API.Processors.CategoryProcessor
     {
         public Category_Delete(DataContext context, ILogger<CategoryController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<vwCategory>>>> Delete(Request<int> request)
+        public async Task<ActionResult<Response<List<Category>>>> Delete(Request<int> request)
         {
-            Response<List<vwCategory>> response;
+            Response<List<Category>> response;
             try
             {
                 if (!Auth.IsAuth(request.Token)) throw new Exception("You have to be logged in");
@@ -28,7 +28,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwCategory>>(ex);
+                response = new Response<List<Category>>(ex);
                 return response;
             }
 

@@ -12,9 +12,9 @@ namespace TimeManager.API.Processors.CategoryProcessor
     {
         public Category_Add(DataContext context, ILogger<CategoryController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<vwCategory>>>> Post(Request<Category> request)
+        public async Task<ActionResult<Response<List<Category>>>> Post(Request<Category> request)
         {
-            Response<List<vwCategory>> response;
+            Response<List<Category>> response;
             try
             {
                 if (!Auth.IsAuth(request.Token)) throw new Exception("You have to be logged in");
@@ -29,7 +29,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwCategory>>(ex);
+                response = new Response<List<Category>>(ex);
                 return response;
             }
 

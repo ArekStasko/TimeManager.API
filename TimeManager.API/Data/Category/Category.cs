@@ -7,6 +7,7 @@ namespace TimeManager.API.Data
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public int ActivitiesNum { get; set; }
+        public int AvgProductivity { get; set; }
     }
 }

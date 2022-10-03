@@ -7,6 +7,6 @@ namespace TimeManager.API.Processors.CategoryProcessor
 {
     public interface ICategory_Get
     {
-        public Task<ActionResult<Response<List<vwCategory>>>> Get(Token token);
+        public Task<ActionResult<Response<List<Category>>>> Get(Token token);
     }
 }

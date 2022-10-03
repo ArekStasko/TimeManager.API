@@ -86,7 +86,7 @@ namespace TimeManager.API.Tests
 
             //activityMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(mockDbContext.Object, null);
+            var processor = ActivityProcessor_Factory.GetActivity_GetAll(mockDbContext.Object, null);
             var result = processor.Get();
             Assert.Pass();
         }
@@ -110,8 +110,8 @@ namespace TimeManager.API.Tests
 
             //activityMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetByCategory(mockDbContext.Object, null);
-            var result = processor.Get()
+            var processor = ActivityProcessor_Factory.GetActivity_GetByCategory(mockDbContext.Object, null);
+            var result = processor.Get();
             Assert.Pass();
         }
 
@@ -134,7 +134,7 @@ namespace TimeManager.API.Tests
 
             //activityMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetvwActivityCategory_GetById(mockDbContext.Object, null);
+            var processor = ActivityProcessor_Factory.GetActivity_GetById(mockDbContext.Object, null);
             var result = processor.Get();
             Assert.Pass();
         }

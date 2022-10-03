@@ -14,9 +14,9 @@ namespace TimeManager.API.Processors.ActivityProcessor
 
         public Activity_Add(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<vwActivityCategory>>>> Post(Request<Activity> request)
+        public async Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request)
         {
-            Response<List<vwActivityCategory>> response;
+            Response<List<Activity>> response;
             try
             {
                 if (!Auth.IsAuth(request.Token)) throw new Exception("You have to be logged in");
@@ -26,13 +26,13 @@ namespace TimeManager.API.Processors.ActivityProcessor
                 _context.Activities.Add(activity);
                 _context.SaveChanges();
 
-                IvwActivityCategory_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetvwActivityCategory_GetAll(_context, _logger);
+                IActivity_GetAll activityProcessor = ActivityProcessor_Factory.GetActivity_GetAll(_context, _logger);
                 _logger.LogInformation("User succesfully added");
-                return await vwActivityCategory_GetAll.Get(request.Token);
+                return await activityProcessor.Get(request.Token);
             }
             catch (Exception ex)
             {
-                response = new Response<List<vwActivityCategory>>(ex);
+                response = new Response<List<Activity>>(ex);
                 _logger.LogError(ex.Message);
                 return response;
             }

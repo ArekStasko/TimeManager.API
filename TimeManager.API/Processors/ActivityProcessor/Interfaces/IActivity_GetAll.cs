@@ -4,8 +4,8 @@ using TimeManager.API.Data.Response;
 
 namespace TimeManager.API.Processors.ActivityProcessor
 {
-    public interface IvwActivityCategory_GetAll
+    public interface IActivity_GetAll
     {
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> Get(Token token);
+        public Task<ActionResult<Response<List<Activity>>>> Get(Token token);
     }
 }

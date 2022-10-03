@@ -8,13 +8,13 @@ using TimeManager.API.Controllers.ActivityControllers;
 
 namespace TimeManager.API.Processors.ActivityProcessor
 {
-    public class vwActivityCategory_Update : Processor<ActivityController>, IActivity_Update
+    public class Activity_Update : Processor<ActivityController>, IActivity_Update
     {
-        public vwActivityCategory_Update(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
+        public Activity_Update(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<vwActivityCategory>>>> Update(Request<Activity> request)
+        public async Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request)
         {
-            Response<List<vwActivityCategory>> response;
+            Response<List<Activity>> response;
 
             try
             {
@@ -30,7 +30,7 @@ namespace TimeManager.API.Processors.ActivityProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwActivityCategory>>(ex);
+                response = new Response<List<Activity>>(ex);
                 return response;
             }
 

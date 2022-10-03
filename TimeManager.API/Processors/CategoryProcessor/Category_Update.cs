@@ -11,9 +11,9 @@ namespace TimeManager.API.Processors.CategoryProcessor
     {
         public Category_Update(DataContext context, ILogger<CategoryController> logger) : base(context, logger) {}
 
-        public async Task<ActionResult<Response<List<vwCategory>>>> Update(Request<Category> request)
+        public async Task<ActionResult<Response<List<Category>>>> Update(Request<Category> request)
         {
-            Response<List<vwCategory>> response;
+            Response<List<Category>> response;
 
             try
             {
@@ -29,7 +29,7 @@ namespace TimeManager.API.Processors.CategoryProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<vwCategory>>(ex);
+                response = new Response<List<Category>>(ex);
                 return response;
             }
 

@@ -7,11 +7,11 @@ namespace TimeManager.API.Controllers.ActivityControllers
 {
     public interface IActivityController
     {
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> Get(Token token);
-        public Task<ActionResult<Response<vwActivityCategory>>> GetById(Request<int> request);
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> GetByCategory(Request<int> request);
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> Add(Request<Activity> request);
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> Delete(Request<int> request);
-        public Task<ActionResult<Response<List<vwActivityCategory>>>> Update(Request<Activity> request);
+        public Task<ActionResult<Response<List<Activity>>>> Get(Token token);
+        public Task<ActionResult<Response<Activity>>> GetById(Request<int> request);
+        public Task<ActionResult<Response<List<Activity>>>> GetByCategory(Request<int> request);
+        public Task<ActionResult<Response<List<Activity>>>> Add(Request<Activity> request);
+        public Task<ActionResult<Response<List<Activity>>>> Delete(Request<int> request);
+        public Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request);
     }
 }
