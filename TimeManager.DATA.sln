@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeManager.DATA", "TimeManager.DATA\TimeManager.DATA.csproj", "{41CEAA8E-0DF5-4328-82E6-BDCA1204E2C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeManager.DATA.Tests", "TimeManager.DATA.Tests\TimeManager.DATA.Tests.csproj", "{7917F9A5-0EB2-49D0-B9EA-F16455AAFE1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41CEAA8E-0DF5-4328-82E6-BDCA1204E2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41CEAA8E-0DF5-4328-82E6-BDCA1204E2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41CEAA8E-0DF5-4328-82E6-BDCA1204E2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41CEAA8E-0DF5-4328-82E6-BDCA1204E2C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7917F9A5-0EB2-49D0-B9EA-F16455AAFE1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7917F9A5-0EB2-49D0-B9EA-F16455AAFE1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7917F9A5-0EB2-49D0-B9EA-F16455AAFE1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7917F9A5-0EB2-49D0-B9EA-F16455AAFE1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E4E0BBA-399C-43C4-9F18-44CBD08D4DBC}
+	EndGlobalSection
+EndGlobal

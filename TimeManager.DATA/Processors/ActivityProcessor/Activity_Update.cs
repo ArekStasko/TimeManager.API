@@ -1,0 +1,33 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TimeManager.DATA.Data;
+using TimeManager.DATA.Data.Response;
+using TimeManager.DATA.Controllers.ActivityControllers;
+
+namespace TimeManager.DATA.Processors.ActivityProcessor
+{
+    public class Activity_Update : Processor<ActivityController>, IActivity_Update
+    {
+        public Activity_Update(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
+
+        public async Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request)
+        {
+            try
+            {
+                var act = _context.Activities.Single(act => act.Id == request.Data.Id);
+                _context.Activities.Remove(act);
+
+                IActivity_Add activity_Add = ActivityProcessor_Factory.GetActivity_Add(_context, _logger);
+                return await activity_Add.Post(request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return new Response<List<Activity>>(ex);
+            }
+
+
+        }
+    }
+}
