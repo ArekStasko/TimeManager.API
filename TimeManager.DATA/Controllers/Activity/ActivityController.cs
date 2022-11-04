@@ -22,7 +22,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         public async Task<ActionResult<Response<List<Activity>>>> Get(Request<string> request)
         {
             IActivity_GetAll vwActivityCategory_GetAll = ActivityProcessor_Factory.GetActivity_GetAll(_context, _logger);
-            var activities = await vwActivityCategory_GetAll.Get(request);
+            var activities = await vwActivityCategory_GetAll.Get(request.userId);
             return Ok(activities);
         }
 
@@ -30,14 +30,14 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         public async Task<ActionResult<Response<Activity>>> GetById(Request<int> request)
         {
             IActivity_GetById vwActivityCategory_GetById = ActivityProcessor_Factory.GetActivity_GetById(_context, _logger);
-            return Ok(await vwActivityCategory_GetById.Get(request));
+            return Ok(await vwActivityCategory_GetById.Get(request.Data, request.userId));
         }
 
         [HttpPost(Name = "GetActivitiesByCategory")]
         public async Task<ActionResult<Response<List<Activity>>>> GetByCategory(Request<int> request)
         {
             IActivity_GetByCategory vwActivityCategory_GetByCategory = ActivityProcessor_Factory.GetActivity_GetByCategory(_context, _logger);
-            return Ok(await vwActivityCategory_GetByCategory.Get(request));
+            return Ok(await vwActivityCategory_GetByCategory.Get(request.Data, request.userId));
         }
 
         [HttpPost(Name = "AddvwActivityCategory")]
@@ -51,7 +51,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         public async Task<ActionResult<Response<List<Activity>>>> Delete(Request<int> request)
         {
             IActivity_Delete vwActivityCategory_Delete = ActivityProcessor_Factory.GetActivity_Delete(_context, _logger);
-            return Ok(vwActivityCategory_Delete.Delete(request));
+            return Ok(vwActivityCategory_Delete.Delete(request.Data, request.userId));
         }
 
         [HttpPost(Name = "UpdatevwActivityCategory")]

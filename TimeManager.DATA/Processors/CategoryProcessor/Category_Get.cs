@@ -10,22 +10,19 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
     {
         public Category_Get(DataContext context, ILogger<CategoryController> logger) : base(context, logger) {}
 
-        public async Task<ActionResult<Response<List<Category>>>> Get(Request<string> request)
+        public async Task<ActionResult<Response<List<Category>>>> Get(int userId)
         {
-            Response<List<Category>> response;
             try
             {
                 var categories = await _context.Categories.ToListAsync();
-                response = new Response<List<Category>>(categories);
+                categories = categories.Where(category => category.UserId == userId).ToList();
 
-                _logger.LogInformation("Successfully gotten category");
-                return response;
+                return new Response<List<Category>>(categories);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<Category>>(ex);
-                return response;
+                return new Response<List<Category>>(ex);
             }
         }
     }

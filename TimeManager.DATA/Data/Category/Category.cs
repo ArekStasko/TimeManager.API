@@ -9,5 +9,6 @@ namespace TimeManager.DATA.Data
         public string Name { get; set; }
         public int ActivitiesNum { get; set; }
         public int AvgProductivity { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -7,6 +7,6 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 {
     public interface IActivity_GetById
     {
-        public Task<ActionResult<Response<Activity>>> Get(Request<int> request);
+        public Task<ActionResult<Response<Activity>>> Get(int activityId, int userId);
     }
 }

@@ -6,6 +6,6 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 {
     public interface IActivity_GetByCategory
     {
-        public Task<ActionResult<Response<List<Activity>>>> Get(Request<int> request);
+        public Task<ActionResult<Response<List<Activity>>>> Get(int categoryId, int userId);
     }
 }
