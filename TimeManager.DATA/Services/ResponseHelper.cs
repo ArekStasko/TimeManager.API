@@ -10,7 +10,7 @@ namespace TimeManager.DATA.Services
     {
         public static async Task<ActionResult<Response<List<Activity>>>> GetAllActivities(DataContext context, ILogger<ActivityController> logger, int userId)
         {
-            IActivity_GetAll activityProcessor = ActivityProcessor_Factory.GetActivity_GetAll(context, logger);
+            IActivity_GetAll activityProcessor = new Activity_GetAll(context, logger);
             return await activityProcessor.Get(userId);
         }
     }

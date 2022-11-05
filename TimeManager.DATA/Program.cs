@@ -2,6 +2,8 @@ using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TimeManager.DATA.Services.interfaces;
+using TimeManager.DATA.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +31,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
+builder.Services.AddScoped<IActivityProcessors, ActivityProcessors>();
 var app = builder.Build();
 
 DatabaseManagerService.MigrationInitialization(app);

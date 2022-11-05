@@ -13,5 +13,6 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         public Task<ActionResult<Response<List<Activity>>>> Add(Request<Activity> request);
         public Task<ActionResult<Response<List<Activity>>>> Delete(Request<int> request);
         public Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request);
+
     }
 }
