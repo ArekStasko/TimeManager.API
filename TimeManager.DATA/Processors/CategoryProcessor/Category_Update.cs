@@ -12,8 +12,6 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
 
         public async Task<ActionResult<Response<List<Category>>>> Update(Request<Category> request)
         {
-            Response<List<Category>> response;
-
             try
             {
                 var cat = _context.Categories.Single(c => c.Id == request.Data.Id);
@@ -26,8 +24,7 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<Category>>(ex);
-                return response;
+                return new Response<List<Category>>(ex);
             }
 
         }

@@ -13,21 +13,18 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
 
         public async Task<ActionResult<Response<List<Category>>>> Post(Request<Category> request)
         {
-            Response<List<Category>> response;
             try
             {
                 _context.Categories.Add(request.Data);
                 _context.SaveChanges();
 
                 ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
-                _logger.LogInformation("Successfully added category");
-                return await Category_Get.Get(new Request<string>() { userId = request.userId });
+                return await Category_Get.Get(request.userId);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                response = new Response<List<Category>>(ex);
-                return response;
+                return new Response<List<Category>>(ex);
             }
 
         }

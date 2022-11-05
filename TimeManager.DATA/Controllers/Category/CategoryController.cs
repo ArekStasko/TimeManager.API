@@ -24,7 +24,7 @@ namespace TimeManager.DATA.Controllers.CategoryControllers
         public async Task<ActionResult<Response<List<Category>>>> Get(Request<string> request)
         {
             ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
-            return Ok(await Category_Get.Get(request));
+            return Ok(await Category_Get.Get(request.userId));
         }
 
         [HttpPost(Name = "AddCategory")]
@@ -38,7 +38,7 @@ namespace TimeManager.DATA.Controllers.CategoryControllers
         public async Task<ActionResult<Response<List<Category>>>> Delete(Request<int> request)
         {
             ICategory_Delete Category_Delete = CategoryProcessor_Factory.GetCategory_Delete(_context, _logger);
-            return Ok(Category_Delete.Delete(request));
+            return Ok(Category_Delete.Delete(request.Data, request.userId));
         }
 
         [HttpPost(Name = "UpdateCategory")]
