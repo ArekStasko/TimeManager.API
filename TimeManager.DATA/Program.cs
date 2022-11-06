@@ -32,6 +32,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IActivityProcessors, ActivityProcessors>();
+builder.Services.AddScoped<ICategoryProcessors, CategoryProcessors>();
+
 var app = builder.Build();
 
 DatabaseManagerService.MigrationInitialization(app);

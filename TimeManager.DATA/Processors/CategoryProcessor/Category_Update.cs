@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Controllers.CategoryControllers;
+using TimeManager.DATA.Services;
 
 namespace TimeManager.DATA.Processors.CategoryProcessor
 {
@@ -16,10 +17,10 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
             {
                 var cat = _context.Categories.Single(c => c.Id == request.Data.Id);
                 _context.Categories.Remove(cat);
+                _context.Categories.Add(request.Data);
+                _context.SaveChanges();
 
-                ICategory_Add Category_Add = CategoryProcessor_Factory.GetCategory_Add(_context, _logger);
-                _logger.LogInformation("Successfully updated category");
-                return await Category_Add.Post(request);
+                return await ResponseHelper.GetAllCategories(_context, _logger, request.userId);
             }
             catch (Exception ex)
             {

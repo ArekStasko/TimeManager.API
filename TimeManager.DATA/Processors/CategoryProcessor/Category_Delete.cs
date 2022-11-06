@@ -2,6 +2,7 @@
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Controllers.CategoryControllers;
+using TimeManager.DATA.Services;
 
 namespace TimeManager.DATA.Processors.CategoryProcessor
 {
@@ -17,8 +18,7 @@ namespace TimeManager.DATA.Processors.CategoryProcessor
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
 
-                ICategory_Get Category_Get = CategoryProcessor_Factory.GetCategory_Get(_context, _logger);
-                return await Category_Get.Get(userId);
+                return await ResponseHelper.GetAllCategories(_context, _logger, userId);
             }
             catch (Exception ex)
             {
