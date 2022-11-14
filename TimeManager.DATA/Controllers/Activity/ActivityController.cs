@@ -3,6 +3,7 @@ using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Processors.ActivityProcessor;
 using TimeManager.DATA.Services.interfaces;
+using TimeManager.DATA.Services.Publisher;
 
 namespace TimeManager.DATA.Controllers.ActivityControllers
 {
@@ -11,12 +12,19 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
     public class ActivityController : ControllerBase, IActivityController
     {
         private readonly IActivityProcessors _processors;
-        public ActivityController(IActivityProcessors processors) => _processors = processors;
+        private readonly IPublisher _publisher;
+
+        public ActivityController(IActivityProcessors processors, IPublisher publisher)
+        {
+            _processors = processors;
+            _publisher = publisher;
+        } 
 
 
         [HttpPost(Name = "GetActivities")]
         public async Task<ActionResult<Response<List<Activity>>>> Get(Request<string> request)
         {
+            _publisher.Publish();
             return Ok(await _processors.Get(request.userId));
         }
 
