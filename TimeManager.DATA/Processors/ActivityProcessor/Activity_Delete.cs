@@ -12,7 +12,7 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 
         public Activity_Delete(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<Activity>>>> Delete(int activityId, int userId)
+        public async Task<ActionResult<Activity>> Delete(int activityId, int userId)
         {
             try
             {
@@ -20,12 +20,12 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
                 _context.Activities.Remove(activity);
                 _context.SaveChanges();
 
-                return await ResponseHelper.GetAllActivities(_context, _logger, userId);
+                return activity;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return new Response<List<Activity>>(ex);
+                throw new Exception(ex.Message);
             }
 
         }

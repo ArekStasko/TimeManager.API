@@ -3,7 +3,7 @@ using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Processors.ActivityProcessor;
 using TimeManager.DATA.Services.interfaces;
-using TimeManager.DATA.Services.Publisher;
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Controllers.ActivityControllers
 {
@@ -12,19 +12,18 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
     public class ActivityController : ControllerBase, IActivityController
     {
         private readonly IActivityProcessors _processors;
-        private readonly IPublisher _publisher;
+        private readonly IMQManager _mqManager;
 
-        public ActivityController(IActivityProcessors processors, IPublisher publisher)
+        public ActivityController(IActivityProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
-            _publisher = publisher;
+            _mqManager = mqManager;
         } 
 
 
         [HttpPost(Name = "GetActivities")]
         public async Task<ActionResult<Response<List<Activity>>>> Get(Request<string> request)
         {
-            _publisher.Publish();
             return Ok(await _processors.Get(request.userId));
         }
 
@@ -43,19 +42,69 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         [HttpPost(Name = "AddActivity")]
         public async Task<ActionResult<Response<List<Activity>>>> Add(Request<Activity> request)
         {
-            return Ok(await _processors.Add_Activity(request));          
+            try
+            {
+                var activity = _processors.Add_Activity(request);
+
+                _mqManager.Publish(
+                    activity,
+                    "entity.exchange.activity.post",
+                    "topic",
+                    "*.queue.durable.dotnetcore.#"
+                );
+
+                var activities = await _processors.Get(request.userId);
+                return Ok(activities);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpDelete(Name = "DeleteActivity")]
         public async Task<ActionResult<Response<List<Activity>>>> Delete(Request<int> request)
         {
-            return Ok(await _processors.Delete_Activity(request.Data, request.userId));
+            try
+            {
+                var activity = _processors.Delete_Activity(request.Data, request.userId);
+
+                _mqManager.Publish(
+                    activity,
+                    "entity.exchange.activity.delete",
+                    "topic",
+                    "*.queue.durable.dotnetcore.#"
+                );
+
+                var activities = await _processors.Get(request.userId);
+                return Ok(activities);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpPost(Name = "UpdateActivity")]
         public async Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request)
         {
-            return Ok(await _processors.Update_Activity(request));
+            try
+            {
+                var activity = await _processors.Update_Activity(request);
+
+                _mqManager.Publish(
+                    activity,
+                    "entity.exchange.activity.update",
+                    "topic",
+                    "*.queue.durable.dotnetcore.#"
+                );
+
+                return Ok(activity);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }

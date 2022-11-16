@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TimeManager.DATA.Services.interfaces;
 using TimeManager.DATA.Services;
-using TimeManager.DATA.Services.Publisher;
+using TimeManager.DATA.Services.MessageQueuer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +34,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IActivityProcessors, ActivityProcessors>();
 builder.Services.AddScoped<ICategoryProcessors, CategoryProcessors>();
-builder.Services.AddScoped<IPublisher, publisher>();
+
+builder.Services.AddMQ();
 
 var app = builder.Build();
 

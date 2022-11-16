@@ -39,19 +39,19 @@ namespace TimeManager.DATA.Services
             return processor.Get(categoryId, userId);
         }
 
-        public Task<ActionResult<Response<List<Activity>>>> Add_Activity(Request<Activity> request)
+        public Task<ActionResult<Activity>> Add_Activity(Request<Activity> request)
         {
             IActivity_Add processor = new Activity_Add(_context, _logger);
             return processor.Post(request);
         }
 
-        public Task<ActionResult<Response<List<Activity>>>> Delete_Activity(int activityId, int userId)
+        public Task<ActionResult<Activity>> Delete_Activity(int activityId, int userId)
         {
             IActivity_Delete processor = new Activity_Delete(_context, _logger);
             return processor.Delete(activityId, userId);
         }
 
-        public Task<ActionResult<Response<List<Activity>>>> Update_Activity(Request<Activity> request)
+        public Task<ActionResult<Activity>> Update_Activity(Request<Activity> request)
         {
             IActivity_Update processor = new Activity_Update(_context, _logger);
             return processor.Update(request);

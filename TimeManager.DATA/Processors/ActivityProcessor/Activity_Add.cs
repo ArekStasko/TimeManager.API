@@ -14,7 +14,7 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 
         public Activity_Add(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request)
+        public async Task<ActionResult<Activity>> Post(Request<Activity> request)
         {            
             try
             {
@@ -24,12 +24,12 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
                 _context.Activities.Add(activity);
                 _context.SaveChanges();
 
-                return await ResponseHelper.GetAllActivities(_context, _logger, request.userId);
+                return activity;
             }
             catch (Exception ex)
             {                
                 _logger.LogError(ex.Message);
-                return new Response<List<Activity>>(ex);
+                throw new Exception(ex.Message);
             }
 
         }

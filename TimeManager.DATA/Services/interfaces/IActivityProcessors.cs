@@ -10,9 +10,9 @@ namespace TimeManager.DATA.Services.interfaces
         public Task<ActionResult<Response<List<Activity>>>> Get(int userId);
         public Task<ActionResult<Response<Activity>>> GetById(int activityId, int userId);
         public Task<ActionResult<Response<List<Activity>>>> GetByCategory(int categoryId, int userId);
-        public Task<ActionResult<Response<List<Activity>>>> Add_Activity(Request<Activity> request);
-        public Task<ActionResult<Response<List<Activity>>>> Delete_Activity(int activityId, int userId);
-        public Task<ActionResult<Response<List<Activity>>>> Update_Activity(Request<Activity> request);
+        public Task<ActionResult<Activity>> Add_Activity(Request<Activity> request);
+        public Task<ActionResult<Activity>> Delete_Activity(int activityId, int userId);
+        public Task<ActionResult<Activity>> Update_Activity(Request<Activity> request);
 
     }
 }

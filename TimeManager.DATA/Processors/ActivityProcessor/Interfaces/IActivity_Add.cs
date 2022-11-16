@@ -6,6 +6,6 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 {
     public interface IActivity_Add
     {
-        public Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request);
+        public Task<ActionResult<Activity>> Post(Request<Activity> request);
     }
 }

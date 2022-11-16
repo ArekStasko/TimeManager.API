@@ -11,7 +11,7 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
     {
         public Activity_Update(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request)
+        public async Task<ActionResult<Activity>> Update(Request<Activity> request)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return new Response<List<Activity>>(ex);
+                throw new Exception(ex.Message);
             }
 
 

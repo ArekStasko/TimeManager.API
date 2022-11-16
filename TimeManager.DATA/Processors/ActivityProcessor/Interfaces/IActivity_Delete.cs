@@ -6,6 +6,6 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 {
     public interface IActivity_Delete
     {
-        public Task<ActionResult<Response<List<Activity>>>> Delete(int activityId, int userId);
+        public Task<ActionResult<Activity>> Delete(int activityId, int userId);
     }
 }

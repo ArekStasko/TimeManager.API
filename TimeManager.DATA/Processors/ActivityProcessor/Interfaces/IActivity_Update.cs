@@ -8,6 +8,6 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
 {
     public interface IActivity_Update
     {
-        public Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request);
+        public Task<ActionResult<Activity>> Update(Request<Activity> request);
     }
 }
