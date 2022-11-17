@@ -48,9 +48,9 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
 
                 _mqManager.Publish(
                     activity,
-                    "entity.exchange.activity.post",
-                    "topic",
-                    "*.queue.durable.dotnetcore.#"
+                    "entity.activity.post",
+                    "direct",
+                    "activity-add"
                 );
 
                 var activities = await _processors.Get(request.userId);
@@ -71,9 +71,9 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
 
                 _mqManager.Publish(
                     activity,
-                    "entity.exchange.activity.delete",
-                    "topic",
-                    "*.queue.durable.dotnetcore.#"
+                    "entity.activity.delete",
+                    "direct",
+                    "activity-delete"
                 );
 
                 var activities = await _processors.Get(request.userId);
@@ -94,9 +94,9 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
 
                 _mqManager.Publish(
                     activity,
-                    "entity.exchange.activity.update",
-                    "topic",
-                    "*.queue.durable.dotnetcore.#"
+                    "entity.activity.update",
+                    "direct",
+                    "activity-update"
                 );
 
                 return Ok(activity);
