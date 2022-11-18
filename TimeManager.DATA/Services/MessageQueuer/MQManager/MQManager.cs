@@ -28,20 +28,6 @@ namespace TimeManager.DATA.Services.MessageQueuer
                 var properties = channel.CreateBasicProperties();
                 properties.Persistent = true;
 
-            channel.QueueDeclare(
-                queue: $"{exchangeName}-queue",
-                durable: false,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null
-                );
-
-            channel.QueueBind(
-              queue: $"{exchangeName}-queue",
-              exchange: exchangeName,
-              routingKey: routeKey
-              );
-
                 channel.BasicPublish(
                     exchangeName, 
                     routeKey, 

@@ -50,7 +50,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     activity,
                     "entity.activity.post",
                     "direct",
-                    "activity-add"
+                    "activity-post"
                 );
 
                 var activities = await _processors.Get(request.userId);
