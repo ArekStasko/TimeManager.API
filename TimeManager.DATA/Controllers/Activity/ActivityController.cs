@@ -39,12 +39,12 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
             return Ok(await _processors.GetByCategory(request.Data, request.userId));
         }
 
-        [HttpPost(Name = "AddActivity")]
-        public async Task<ActionResult<Response<List<Activity>>>> Add(Request<Activity> request)
+        [HttpPost(Name = "PostActivity")]
+        public async Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request)
         {
             try
             {
-                var activity = _processors.Add_Activity(request);
+                var activity = _processors.Post_Activity(request);
 
                 _mqManager.Publish(
                     activity,

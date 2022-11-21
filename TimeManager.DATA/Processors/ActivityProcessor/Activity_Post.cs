@@ -9,10 +9,10 @@ using TimeManager.DATA.Services;
 
 namespace TimeManager.DATA.Processors.ActivityProcessor
 {
-    public class Activity_Add : Processor<ActivityController>, IActivity_Add
+    public class Activity_Post : Processor<ActivityController>, IActivity_Post
     {
 
-        public Activity_Add(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
+        public Activity_Post(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Activity>> Post(Request<Activity> request)
         {            

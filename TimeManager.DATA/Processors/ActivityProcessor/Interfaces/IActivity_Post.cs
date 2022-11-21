@@ -4,7 +4,7 @@ using TimeManager.DATA.Data.Response;
 
 namespace TimeManager.DATA.Processors.ActivityProcessor
 {
-    public interface IActivity_Add
+    public interface IActivity_Post
     {
         public Task<ActionResult<Activity>> Post(Request<Activity> request);
     }

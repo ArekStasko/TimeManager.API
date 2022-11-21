@@ -39,9 +39,9 @@ namespace TimeManager.DATA.Services
             return processor.Get(categoryId, userId);
         }
 
-        public Task<ActionResult<Activity>> Add_Activity(Request<Activity> request)
+        public Task<ActionResult<Activity>> Post_Activity(Request<Activity> request)
         {
-            IActivity_Add processor = new Activity_Add(_context, _logger);
+            IActivity_Post processor = new Activity_Post(_context, _logger);
             return processor.Post(request);
         }
 

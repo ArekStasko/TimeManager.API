@@ -29,13 +29,14 @@ namespace TimeManager.DATA.Services.MessageQueuer
                 properties.Persistent = true;
 
                 channel.BasicPublish(
-                    exchangeName, 
-                    routeKey, 
-                    properties, 
+                    exchangeName,
+                    routeKey,
+                    properties,
                     sendBytes
                     );
 
-            } catch(Exception ex) 
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
