@@ -32,7 +32,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IActivityProcessors, ActivityProcessors>();
+builder.Services.AddScoped<IActTaskProcessors, ActTaskProcessors>();
 
 builder.Services.AddMQ();
 

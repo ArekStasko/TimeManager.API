@@ -1,5 +1,5 @@
-﻿CREATE VIEW vwActivityCategory AS
+﻿CREATE VIEW vwactTaskCategory AS
 SELECT A.[Id], A.[Name], A.[Description], C.[Name] AS CategoryName
-FROM [dbo].[Activities] AS A 
+FROM [dbo].[ActTasks] AS A 
 INNER JOIN [dbo].[Categories] AS C
 ON A.[CategoryId] = C.[Id]

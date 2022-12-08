@@ -3,28 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
-using TimeManager.DATA.Controllers.ActivityControllers;
+using TimeManager.DATA.Controllers.ActTaskControllers;
 using TimeManager.DATA.Services;
 
 
-namespace TimeManager.DATA.Processors.ActivityProcessor
+namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class Activity_Post : Processor<ActivityController>, IActivity_Post
+    public class ActTask_Post : Processor<ActTaskController>, IActTask_Post
     {
 
-        public Activity_Post(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
+        public ActTask_Post(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Activity>> Post(Request<Activity> request)
+        public async Task<ActionResult<ActTask>> Post(Request<ActTask> request)
         {            
             try
             {
                 //if (request.Data.CategoryId == 0) throw new Exception("CategoryID is 0");
-                Activity activity = request.Data;
-                activity.UserId = request.userId;
-                _context.Activities.Add(activity);
+                Data.ActTask actTask = request.Data;
+                actTask.UserId = request.userId;
+                _context.ActTasks.Add(actTask);
                 _context.SaveChanges();
 
-                return activity;
+                return actTask;
             }
             catch (Exception ex)
             {                

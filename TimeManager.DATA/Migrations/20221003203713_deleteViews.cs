@@ -9,7 +9,7 @@ namespace TimeManager.DATA.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "ActivitiesNum",
+                name: "ActTasksNum",
                 table: "Categories",
                 type: "int",
                 nullable: false,
@@ -24,7 +24,7 @@ namespace TimeManager.DATA.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "CategoryName",
-                table: "Activities",
+                table: "ActTasks",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -33,7 +33,7 @@ namespace TimeManager.DATA.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ActivitiesNum",
+                name: "ActTasksNum",
                 table: "Categories");
 
             migrationBuilder.DropColumn(
@@ -42,7 +42,7 @@ namespace TimeManager.DATA.Migrations
 
             migrationBuilder.DropColumn(
                 name: "CategoryName",
-                table: "Activities");
+                table: "ActTasks");
         }
     }
 }

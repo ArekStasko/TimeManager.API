@@ -1,22 +1,22 @@
 {
   "script": {
     "DDL": [
-      "\\1.0.0\\dbo.Activities.Create.sql",
+      "\\1.0.0\\dbo.ActTasks.Create.sql",
       "\\1.0.0\\dbo.Categories.Create.sql",
-      "\\1.0.0\\dbo.vwActivityCategory.Create.sql",
-      "\\1.1.0\\dbo.vwActivityCategory.Alter.sql",
-      "\\2.0.0\\dbo.Activities.Alter.sql",
+      "\\1.0.0\\dbo.vwactTaskCategory.Create.sql",
+      "\\1.1.0\\dbo.vwactTaskCategory.Alter.sql",
+      "\\2.0.0\\dbo.ActTasks.Alter.sql",
       "\\2.0.0\\dbo.vwCategories.Create.sql",
-      "\\2.0.0\\dbo.vwActivityCategory.Alter.sql",
+      "\\2.0.0\\dbo.vwactTaskCategory.Alter.sql",
       "\\2.1.0\\dbo.Users.Create.sql",
       "\\2.1.0\\dbo.Tokens.Create.sql",
       "\\2.1.0\\dbo.TokenKey.Create.sql",
-      "\\2.2.0\\dbo.Activities.Alter.sql",
-      "\\2.2.0\\dbo.vwActivityCategory.Alter.sql"
+      "\\2.2.0\\dbo.ActTasks.Alter.sql",
+      "\\2.2.0\\dbo.vwactTaskCategory.Alter.sql"
     ],
     "DML": [
       "\\2.0.0\\dbo.Categories.Insert.sql",
-      "\\2.2.0\\dbo.Activities.Insert.sql"
+      "\\2.2.0\\dbo.ActTasks.Insert.sql"
     ],
     "DQL": []
   }

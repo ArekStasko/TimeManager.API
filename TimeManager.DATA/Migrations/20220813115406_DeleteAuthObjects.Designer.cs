@@ -24,7 +24,7 @@ namespace TimeManager.DATA.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("TimeManager.DATA.Data.Activity", b =>
+            modelBuilder.Entity("TimeManager.DATA.Data.actTask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace TimeManager.DATA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("ActTasks");
                 });
 
             modelBuilder.Entity("TimeManager.DATA.Data.Category", b =>
@@ -145,7 +145,7 @@ namespace TimeManager.DATA.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TimeManager.DATA.Data.vwActivityCategory", b =>
+            modelBuilder.Entity("TimeManager.DATA.Data.vwactTaskCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,7 +182,7 @@ namespace TimeManager.DATA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("vwActivityCategory");
+                    b.ToTable("vwactTaskCategory");
                 });
 
             modelBuilder.Entity("TimeManager.DATA.Data.vwCategory", b =>
@@ -193,7 +193,7 @@ namespace TimeManager.DATA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ActivitiesNum")
+                    b.Property<int>("ActTasksNum")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")

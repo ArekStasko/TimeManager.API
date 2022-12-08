@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Activities](
+﻿CREATE TABLE [dbo].[ActTasks](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](255) NOT NULL,
 	[Description] [varchar](255) NOT NULL,

@@ -11,28 +11,28 @@ namespace TimeManager.DATA.Migrations
         {
             migrationBuilder.AddColumn<DateTime>(
                 name: "DateAdded",
-                table: "Activities",
+                table: "ActTasks",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "DateCompleted",
-                table: "Activities",
+                table: "ActTasks",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "Deadline",
-                table: "Activities",
+                table: "ActTasks",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<int>(
                 name: "UserId",
-                table: "Activities",
+                table: "ActTasks",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -82,7 +82,7 @@ namespace TimeManager.DATA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vwActivityCategory",
+                name: "vwactTaskCategory",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -98,7 +98,7 @@ namespace TimeManager.DATA.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_vwActivityCategory", x => x.Id);
+                    table.PrimaryKey("PK_vwactTaskCategory", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,7 +108,7 @@ namespace TimeManager.DATA.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActivitiesNum = table.Column<int>(type: "int", nullable: false)
+                    ActTasksNum = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,26 +128,26 @@ namespace TimeManager.DATA.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "vwActivityCategory");
+                name: "vwactTaskCategory");
 
             migrationBuilder.DropTable(
                 name: "vwCategories");
 
             migrationBuilder.DropColumn(
                 name: "DateAdded",
-                table: "Activities");
+                table: "ActTasks");
 
             migrationBuilder.DropColumn(
                 name: "DateCompleted",
-                table: "Activities");
+                table: "ActTasks");
 
             migrationBuilder.DropColumn(
                 name: "Deadline",
-                table: "Activities");
+                table: "ActTasks");
 
             migrationBuilder.DropColumn(
                 name: "UserId",
-                table: "Activities");
+                table: "ActTasks");
         }
     }
 }

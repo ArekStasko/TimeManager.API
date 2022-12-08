@@ -6,8 +6,7 @@ namespace TimeManager.DATA.Data
     {
         public DataContext() { }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Activity> Activities { get; set; }
-        public DbSet<Task> Categories { get; set; }
+        public DbSet<ActTask> ActTasks { get; set; }
 
     }
 }

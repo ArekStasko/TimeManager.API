@@ -1,5 +1,5 @@
 using System;
-using TimeManager.DATA.Processors.ActivityProcessor;
+using TimeManager.DATA.Processors.actTaskProcessor;
 using NUnit.Framework;
 using FluentAssertions;
 using TimeManager.DATA.Data;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TimeManager.DATA.Tests
 {
-    public class ActivityProcTests
+    public class actTaskProcTests
     {
         Mock<DataContext> mockDbContext = new Mock<DataContext>();
 
@@ -20,10 +20,10 @@ namespace TimeManager.DATA.Tests
         }
 
         [Test]
-        public void ActivityAdd_Should_AddActivity()
+        public void actTaskAdd_Should_AddactTask()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -36,18 +36,18 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_Add(mockDbContext.Object, null);
-            var result = processor.Post(activity);
+            var processor = actTaskProcessor_Factory.GetactTask_Add(mockDbContext.Object, null);
+            var result = processor.Post(actTask);
             Assert.Pass();
         }
 
         [Test]
-        public void ActivityDelete_Should_DeleteActivity()
+        public void actTaskDelete_Should_DeleteactTask()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -60,18 +60,18 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_Delete(mockDbContext.Object, null);
-            var result = processor.Delete(activity);
+            var processor = actTaskProcessor_Factory.GetactTask_Delete(mockDbContext.Object, null);
+            var result = processor.Delete(actTask);
             Assert.Pass();
         }
 
         [Test]
-        public void ActivityGetAll_Should_ReturnAllActivities()
+        public void actTaskGetAll_Should_ReturnAllActTasks()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -84,18 +84,18 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_GetAll(mockDbContext.Object, null);
+            var processor = actTaskProcessor_Factory.GetactTask_GetAll(mockDbContext.Object, null);
             var result = processor.Get();
             Assert.Pass();
         }
 
         [Test]
-        public void ActivityGetByCategory_Should_ReturnActivitiesByCategory()
+        public void actTaskGetByCategory_Should_ReturnActTasksByCategory()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -108,18 +108,18 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_GetByCategory(mockDbContext.Object, null);
+            var processor = actTaskProcessor_Factory.GetactTask_GetByCategory(mockDbContext.Object, null);
             var result = processor.Get();
             Assert.Pass();
         }
 
         [Test]
-        public void ActivityById_Should_ReturnActivityWithSpecificId()
+        public void actTaskById_Should_ReturnactTaskWithSpecificId()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -132,18 +132,18 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_GetById(mockDbContext.Object, null);
+            var processor = actTaskProcessor_Factory.GetactTask_GetById(mockDbContext.Object, null);
             var result = processor.Get();
             Assert.Pass();
         }
 
         [Test]
-        public void ActivityUpdate_Should_UpdateActivity()
+        public void actTaskUpdate_Should_UpdateactTask()
         {
-            var activityMock = new Mock<DbSet<Activity>>();
-            var activity = new Activity()
+            var actTaskMock = new Mock<DbSet<ActTask>>();
+            var actTask = new ActTask()
             {
                 Id = 1,
                 Name = "TestName",
@@ -156,9 +156,9 @@ namespace TimeManager.DATA.Tests
                 Priority = 1,
             };
 
-            //activityMock.Setup();
+            //actTaskMock.Setup();
 
-            var processor = ActivityProcessor_Factory.GetActivity_Update(mockDbContext.Object, null);
+            var processor = actTaskProcessor_Factory.GetactTask_Update(mockDbContext.Object, null);
             var result = processor.Update();
             Assert.Pass();
         }

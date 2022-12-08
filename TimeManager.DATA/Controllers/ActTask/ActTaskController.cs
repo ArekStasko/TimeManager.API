@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
-using TimeManager.DATA.Processors.ActivityProcessor;
+using TimeManager.DATA.Processors.actTaskProcessor;
 using TimeManager.DATA.Services.interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
 
-namespace TimeManager.DATA.Controllers.ActivityControllers
+namespace TimeManager.DATA.Controllers.ActTaskControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ActivityController : ControllerBase, IActivityController
+    public class ActTaskController : ControllerBase, IActTaskController
     {
-        private readonly IActivityProcessors _processors;
+        private readonly IActTaskProcessors _processors;
         private readonly IMQManager _mqManager;
 
-        public ActivityController(IActivityProcessors processors, IMQManager mqManager)
+        public ActTaskController(IActTaskProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
             _mqManager = mqManager;
@@ -22,15 +22,15 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
 
 
         [HttpPost(Name = "GetActivities")]
-        public async Task<ActionResult<Response<List<Activity>>>> Get(Request<string> request)
+        public async Task<ActionResult<Response<List<Task>>>> Get(Request<string> request)
         {
-            return Ok(await _processors.Get(request.userId));
+            return Ok(await _processors.ActTask_Get(request.userId));
         }
 
         [HttpPost(Name = "GetActivityById")]
-        public async Task<ActionResult<Response<Activity>>> GetById(Request<int> request)
+        public async Task<ActionResult<Response<Task>>> GetById(Request<int> request)
         {
-            return Ok(await _processors.GetById(request.Data, request.userId));
+            return Ok(await _processors.ActTask_GetById(request.Data, request.userId));
         }
 
         /*
@@ -42,11 +42,11 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         */ 
 
         [HttpPost(Name = "PostActivity")]
-        public async Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request)
+        public async Task<ActionResult<Response<List<Task>>>> Post(Request<Data.ActTask> request)
         {
             try
             {
-                var activity = _processors.Post_Activity(request);
+                var activity = _processors.ActTask_Post(request);
 
                 _mqManager.Publish(
                     activity,
@@ -55,7 +55,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     "Activity_Post"
                 );
 
-                var activities = await _processors.Get(request.userId);
+                var activities = await _processors.ActTask_Get(request.userId);
                 return Ok(activities);
             }
             catch (Exception ex)
@@ -65,11 +65,11 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         }
 
         [HttpDelete(Name = "DeleteActivity")]
-        public async Task<ActionResult<Response<List<Activity>>>> Delete(Request<int> request)
+        public async Task<ActionResult<Response<List<Task>>>> Delete(Request<int> request)
         {
             try
             {
-                var activity = _processors.Delete_Activity(request.Data, request.userId);
+                var activity = _processors.ActTask_Delete(request.Data, request.userId);
 
                 _mqManager.Publish(
                     activity,
@@ -78,7 +78,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     "Activity_Delete"
                 );
 
-                var activities = await _processors.Get(request.userId);
+                var activities = await _processors.ActTask_Get(request.userId);
                 return Ok(activities);
             }
             catch (Exception ex)
@@ -88,11 +88,11 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
         }
 
         [HttpPost(Name = "UpdateActivity")]
-        public async Task<ActionResult<Response<List<Activity>>>> Update(Request<Activity> request)
+        public async Task<ActionResult<Response<List<Task>>>> Update(Request<Data.ActTask> request)
         {
             try
             {
-                var activity = await _processors.Update_Activity(request);
+                var activity = await _processors.ActTask_Update(request);
 
                 _mqManager.Publish(
                     activity,

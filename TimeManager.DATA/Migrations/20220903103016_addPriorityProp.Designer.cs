@@ -24,7 +24,7 @@ namespace TimeManager.DATA.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("TimeManager.DATA.Data.Activity", b =>
+            modelBuilder.Entity("TimeManager.DATA.Data.actTask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace TimeManager.DATA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("ActTasks");
                 });
 
             modelBuilder.Entity("TimeManager.DATA.Data.Category", b =>
@@ -80,7 +80,7 @@ namespace TimeManager.DATA.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("TimeManager.DATA.Data.vwActivityCategory", b =>
+            modelBuilder.Entity("TimeManager.DATA.Data.vwactTaskCategory", b =>
                 {
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -115,12 +115,12 @@ namespace TimeManager.DATA.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.ToView("vwActivityCategory");
+                    b.ToView("vwactTaskCategory");
                 });
 
             modelBuilder.Entity("TimeManager.DATA.Data.vwCategory", b =>
                 {
-                    b.Property<int>("ActivitiesNum")
+                    b.Property<int>("ActTasksNum")
                         .HasColumnType("int");
 
                     b.Property<int>("AvgProductivity")

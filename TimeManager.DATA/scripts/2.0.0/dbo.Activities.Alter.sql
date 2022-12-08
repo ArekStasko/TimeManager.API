@@ -1,4 +1,4 @@
-﻿ALTER TABLE [dbo].[Activities]
+﻿ALTER TABLE [dbo].[ActTasks]
 ADD DateAdded DATETIME NOT NULL DEFAULT GETDATE(),
     DateCompleted DATETIME,
 	Deadline DATETIME 

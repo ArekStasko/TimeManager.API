@@ -10,7 +10,7 @@ namespace TimeManager.DATA.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "Priority",
-                table: "Activities",
+                table: "ActTasks",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
@@ -20,7 +20,7 @@ namespace TimeManager.DATA.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Priority",
-                table: "Activities");
+                table: "ActTasks");
         }
     }
 }

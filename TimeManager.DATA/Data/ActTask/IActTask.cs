@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TimeManager.DATA.Data
+﻿namespace TimeManager.DATA.Data
 {
-    public class Activity : IActivity
+    public interface IActTask
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
