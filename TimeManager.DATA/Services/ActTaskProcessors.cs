@@ -12,9 +12,9 @@ namespace TimeManager.DATA.Services
     public class ActTaskProcessors : IActTaskProcessors
     {
         public readonly DataContext _context;
-        private readonly ILogger<ActTaskController> _logger;
+        private readonly ILogger<ActTaskSetController> _logger;
 
-        public ActTaskProcessors(DataContext context, ILogger<ActTaskController> logger)
+        public ActTaskProcessors(DataContext context, ILogger<ActTaskSetController> logger)
         {
             _context = context;
             _logger = logger;

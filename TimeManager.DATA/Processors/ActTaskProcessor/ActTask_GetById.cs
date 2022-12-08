@@ -7,9 +7,9 @@ using TimeManager.DATA.Controllers.ActTaskControllers;
 
 namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class ActTask_GetById : Processor<ActTaskController>, IActTask_GetById
+    public class ActTask_GetById : Processor<ActTaskSetController>, IActTask_GetById
     {
-        public ActTask_GetById(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
+        public ActTask_GetById(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<Response<ActTask>>> Get(int actTaskId, int userId)
         {

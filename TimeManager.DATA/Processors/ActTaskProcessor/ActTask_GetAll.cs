@@ -8,9 +8,9 @@ using TimeManager.DATA.Controllers.ActTaskControllers;
 
 namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class ActTask_GetAll : Processor<ActTaskController>, IActTask_GetAll
+    public class ActTask_GetAll : Processor<ActTaskSetController>, IActTask_GetAll
     {
-        public ActTask_GetAll(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
+        public ActTask_GetAll(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
         public async Task<ActionResult<Response<List<ActTask>>>> Get(int userId)
         {
             try

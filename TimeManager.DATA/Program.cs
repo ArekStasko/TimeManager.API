@@ -33,6 +33,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IActTaskProcessors, ActTaskProcessors>();
+builder.Services.AddScoped<IActTaskSetProcessors, ActTaskSetProcessors>();
 
 builder.Services.AddMQ();
 

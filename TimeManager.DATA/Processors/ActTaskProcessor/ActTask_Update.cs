@@ -7,9 +7,9 @@ using TimeManager.DATA.Controllers.ActTaskControllers;
 
 namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class ActTask_Update : Processor<ActTaskController>, IActTask_Update
+    public class ActTask_Update : Processor<ActTaskSetController>, IActTask_Update
     {
-        public ActTask_Update(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
+        public ActTask_Update(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<ActTask>> Update(Request<Data.ActTask> request)
         {

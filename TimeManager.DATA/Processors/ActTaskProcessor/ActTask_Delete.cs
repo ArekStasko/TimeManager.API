@@ -7,10 +7,10 @@ using TimeManager.DATA.Services;
 
 namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class ActTask_Delete : Processor<ActTaskController>, IActTask_Delete
+    public class ActTask_Delete : Processor<ActTaskSetController>, IActTask_Delete
     {
 
-        public ActTask_Delete(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
+        public ActTask_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<ActTask>> Delete(int actTaskId, int userId)
         {

@@ -9,12 +9,12 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ActTaskController : ControllerBase, IActTaskController
+    public class ActTaskSetController : ControllerBase, IActTaskSetController
     {
         private readonly IActTaskProcessors _processors;
         private readonly IMQManager _mqManager;
 
-        public ActTaskController(IActTaskProcessors processors, IMQManager mqManager)
+        public ActTaskSetController(IActTaskProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
             _mqManager = mqManager;

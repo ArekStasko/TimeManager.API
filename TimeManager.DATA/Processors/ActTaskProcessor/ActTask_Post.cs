@@ -9,10 +9,10 @@ using TimeManager.DATA.Services;
 
 namespace TimeManager.DATA.Processors.actTaskProcessor
 {
-    public class ActTask_Post : Processor<ActTaskController>, IActTask_Post
+    public class ActTask_Post : Processor<ActTaskSetController>, IActTask_Post
     {
 
-        public ActTask_Post(DataContext context, ILogger<ActTaskController> logger) : base(context, logger) { }
+        public ActTask_Post(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
         public async Task<ActionResult<ActTask>> Post(Request<ActTask> request)
         {            

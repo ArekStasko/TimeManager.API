@@ -5,7 +5,7 @@ using TimeManager.DATA.Data.Response;
 
 namespace TimeManager.DATA.Controllers.ActTaskControllers
 {
-    public interface IActTaskController
+    public interface IActTaskSetController
     {
         public Task<ActionResult<Response<List<Task>>>> Get(Request<string> request);
         public Task<ActionResult<Response<Task>>> GetById(Request<int> request);
