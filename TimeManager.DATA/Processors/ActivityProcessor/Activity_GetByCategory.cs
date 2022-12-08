@@ -7,6 +7,7 @@ using TimeManager.DATA.Controllers.ActivityControllers;
 
 namespace TimeManager.DATA.Processors.ActivityProcessor
 {
+    /*
     public class Activity_GetByCategory : Processor<ActivityController>, IActivity_GetByCategory
     {
         public Activity_GetByCategory(DataContext context, ILogger<ActivityController> logger) : base(context, logger) { }
@@ -27,4 +28,5 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
             }
         }
     }
+    */
 }

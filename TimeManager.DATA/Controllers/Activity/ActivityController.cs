@@ -33,11 +33,13 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
             return Ok(await _processors.GetById(request.Data, request.userId));
         }
 
+        /*
         [HttpPost(Name = "GetActivitiesByCategory")]
         public async Task<ActionResult<Response<List<Activity>>>> GetByCategory(Request<int> request)
         {    
             return Ok(await _processors.GetByCategory(request.Data, request.userId));
         }
+        */ 
 
         [HttpPost(Name = "PostActivity")]
         public async Task<ActionResult<Response<List<Activity>>>> Post(Request<Activity> request)
@@ -50,7 +52,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     activity,
                     "entity.activity.post",
                     "direct",
-                    "activity-post"
+                    "Activity_Post"
                 );
 
                 var activities = await _processors.Get(request.userId);
@@ -73,7 +75,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     activity,
                     "entity.activity.delete",
                     "direct",
-                    "activity-delete"
+                    "Activity_Delete"
                 );
 
                 var activities = await _processors.Get(request.userId);
@@ -96,7 +98,7 @@ namespace TimeManager.DATA.Controllers.ActivityControllers
                     activity,
                     "entity.activity.update",
                     "direct",
-                    "activity-update"
+                    "Activity_Update"
                 );
 
                 return Ok(activity);

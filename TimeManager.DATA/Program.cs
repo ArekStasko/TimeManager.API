@@ -33,7 +33,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IActivityProcessors, ActivityProcessors>();
-builder.Services.AddScoped<ICategoryProcessors, CategoryProcessors>();
 
 builder.Services.AddMQ();
 

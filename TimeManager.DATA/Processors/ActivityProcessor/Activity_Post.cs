@@ -18,7 +18,7 @@ namespace TimeManager.DATA.Processors.ActivityProcessor
         {            
             try
             {
-                if (request.Data.CategoryId == 0) throw new Exception("CategoryID is 0");
+                //if (request.Data.CategoryId == 0) throw new Exception("CategoryID is 0");
                 Activity activity = request.Data;
                 activity.UserId = request.userId;
                 _context.Activities.Add(activity);

@@ -32,13 +32,13 @@ namespace TimeManager.DATA.Services
             IActivity_GetById processor = new Activity_GetById(_context, _logger);
             return processor.Get(activityId, userId);
         }
-
+        /*
         public Task<ActionResult<Response<List<Activity>>>> GetByCategory(int categoryId, int userId)
         {
             IActivity_GetByCategory processor = new Activity_GetByCategory(_context, _logger);
             return processor.Get(categoryId, userId);
         }
-
+        */
         public Task<ActionResult<Activity>> Post_Activity(Request<Activity> request)
         {
             IActivity_Post processor = new Activity_Post(_context, _logger);
