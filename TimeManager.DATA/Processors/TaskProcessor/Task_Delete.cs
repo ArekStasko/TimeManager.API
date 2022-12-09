@@ -12,7 +12,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Task_>> Delete(int actTaskId, int userId)
+        public async Task<ActionResult<Task_>> Execute(int actTaskId, int userId)
         {
             try
             {

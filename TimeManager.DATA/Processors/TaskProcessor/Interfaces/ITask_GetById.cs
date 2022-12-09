@@ -7,6 +7,6 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 {
     public interface ITask_GetById
     {
-        public Task<ActionResult<Response<Task_>>> Get(int actTaskId, int userId);
+        public Task<ActionResult<Response<Task_>>> Execute(int actTaskId, int userId);
     }
 }

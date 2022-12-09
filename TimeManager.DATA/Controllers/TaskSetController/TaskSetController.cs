@@ -18,9 +18,87 @@ namespace TimeManager.DATA.Controllers.ActTaskSetControllers
         {
             _processors = processors;
             _mqManager = mqManager;
-        } 
+        }
 
-        [HttpPost(Name = "UpdateActivity")]
+        [HttpPost(Name = "DeleteDate")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> DeleteDate(Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost(Name = "AddDate")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> AddDate(Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost(Name = "GetTaskSetById")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> GetById(Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            { 
+
+            }
+        }
+
+        [HttpPost(Name = "GetAllTaskSets")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> GetAll (Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost(Name = "DeleteTaskSet")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> Delete(Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost(Name = "PostTaskSet")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> Post(Request<Data.Task_> request)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        [HttpPost(Name = "UpdateTaskSet")]
         public async Task<ActionResult<Response<List<TaskSet>>>> Update(Request<Data.Task_> request)
         {
             try

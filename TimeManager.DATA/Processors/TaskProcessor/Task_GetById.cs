@@ -11,7 +11,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_GetById(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Response<Task_>>> Get(int actTaskId, int userId)
+        public async Task<ActionResult<Response<Task_>>> Execute(int actTaskId, int userId)
         {
             try
             {

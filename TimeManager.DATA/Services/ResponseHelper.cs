@@ -8,10 +8,10 @@ namespace TimeManager.DATA.Services
 {
     public static class ResponseHelper
     {
-        public static async Task<ActionResult<Response<List<Task_>>>> GetAllActTasks(DataContext context, ILogger<ActTaskSetController> logger, int userId)
+        public static async Task<ActionResult<Response<List<Task_>>>> GetAllTasks(DataContext context, ILogger<ActTaskSetController> logger, int userId)
         {
             ITask_GetAll actTaskProcessor = new Task_GetAll(context, logger);
-            return await actTaskProcessor.Get(userId);
+            return await actTaskProcessor.Execute(userId);
         }
     }
 }

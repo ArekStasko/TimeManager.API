@@ -11,7 +11,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     public class Task_GetAll : Processor<ActTaskSetController>, ITask_GetAll
     {
         public Task_GetAll(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
-        public async Task<ActionResult<Response<List<Task_>>>> Get(int userId)
+        public async Task<ActionResult<Response<List<Task_>>>> Execute(int userId)
         {
             try
             {

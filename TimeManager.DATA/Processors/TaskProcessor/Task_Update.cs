@@ -11,15 +11,15 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_Update(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Task_>> Update(Request<Data.Task_> request)
+        public async Task<ActionResult<Task_>> Execute(Request<Data.Task_> request)
         {
             try
             {
                 var act = _context.ActTasks.Single(act => act.Id == request.Data.Id);
                 _context.ActTasks.Remove(act);
 
-                IActTask_Post actTask_Add = new Task_Post(_context, _logger);
-                return await actTask_Add.Post(request);
+                ITask_Post actTask_Add = new Task_Post(_context, _logger);
+                return await actTask_Add.Execute(request);
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Post(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Task_>> Post(Request<Task_> request)
+        public async Task<ActionResult<Task_>> Execute(Request<Task_> request)
         {            
             try
             {
