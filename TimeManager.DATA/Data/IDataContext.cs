@@ -4,6 +4,6 @@ namespace TimeManager.DATA.Data
 {
     public interface IDataContext 
     {
-        public DbSet<ActTask> ActTasks { get; set; }
+        public DbSet<Task_> ActTasks { get; set; }
     }
 }

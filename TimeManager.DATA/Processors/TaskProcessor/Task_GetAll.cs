@@ -6,23 +6,23 @@ using Newtonsoft.Json;
 using TimeManager.DATA.Controllers.ActTaskControllers;
 
 
-namespace TimeManager.DATA.Processors.actTaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class ActTask_GetAll : Processor<ActTaskSetController>, IActTask_GetAll
+    public class Task_GetAll : Processor<ActTaskSetController>, ITask_GetAll
     {
-        public ActTask_GetAll(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
-        public async Task<ActionResult<Response<List<ActTask>>>> Get(int userId)
+        public Task_GetAll(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public async Task<ActionResult<Response<List<Task_>>>> Get(int userId)
         {
             try
             {
                 var ActTasks = _context.ActTasks.ToList();
                 ActTasks = ActTasks.Where(a => a.UserId == userId).ToList();
-                return new Response<List<ActTask>>(ActTasks);
+                return new Response<List<Task_>>(ActTasks);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return new Response<List<Data.ActTask>>(ex); 
+                return new Response<List<Data.Task_>>(ex); 
             }
         }
     }

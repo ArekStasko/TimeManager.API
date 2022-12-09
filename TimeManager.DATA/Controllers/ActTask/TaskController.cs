@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
-using TimeManager.DATA.Processors.actTaskProcessor;
+using TimeManager.DATA.Processors.TaskProcessor;
 using TimeManager.DATA.Services.interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
 
@@ -11,10 +11,10 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
     [ApiController]
     public class ActTaskSetController : ControllerBase, IActTaskSetController
     {
-        private readonly IActTaskProcessors _processors;
+        private readonly ITaskProcessors _processors;
         private readonly IMQManager _mqManager;
 
-        public ActTaskSetController(IActTaskProcessors processors, IMQManager mqManager)
+        public ActTaskSetController(ITaskProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
             _mqManager = mqManager;
@@ -42,7 +42,7 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
         */ 
 
         [HttpPost(Name = "PostActivity")]
-        public async Task<ActionResult<Response<List<Task>>>> Post(Request<Data.ActTask> request)
+        public async Task<ActionResult<Response<List<Task>>>> Post(Request<Data.Task_> request)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
         }
 
         [HttpPost(Name = "UpdateActivity")]
-        public async Task<ActionResult<Response<List<Task>>>> Update(Request<Data.ActTask> request)
+        public async Task<ActionResult<Response<List<Task>>>> Update(Request<Data.Task_> request)
         {
             try
             {

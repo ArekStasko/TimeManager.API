@@ -2,7 +2,7 @@
 
 namespace TimeManager.DATA.Services
 {
-    public class ActTaskSetProcessors : IActTaskSetProcessors
+    public class TaskSetProcessors : ITaskSetProcessors
     {
     }
 }

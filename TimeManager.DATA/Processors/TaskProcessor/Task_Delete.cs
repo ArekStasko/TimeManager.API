@@ -5,14 +5,14 @@ using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Controllers.ActTaskControllers;
 using TimeManager.DATA.Services;
 
-namespace TimeManager.DATA.Processors.actTaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class ActTask_Delete : Processor<ActTaskSetController>, IActTask_Delete
+    public class Task_Delete : Processor<ActTaskSetController>, ITask_Delete
     {
 
-        public ActTask_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public Task_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<ActTask>> Delete(int actTaskId, int userId)
+        public async Task<ActionResult<Task_>> Delete(int actTaskId, int userId)
         {
             try
             {

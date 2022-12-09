@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Processors\ActTasksSetProcessor\" />
+    <Folder Include="Processors\TaskSetProcessor\" />
   </ItemGroup>
 
 </Project>

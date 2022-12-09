@@ -7,19 +7,19 @@ using TimeManager.DATA.Controllers.ActTaskControllers;
 using TimeManager.DATA.Services;
 
 
-namespace TimeManager.DATA.Processors.actTaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class ActTask_Post : Processor<ActTaskSetController>, IActTask_Post
+    public class Task_Post : Processor<ActTaskSetController>, ITask_Post
     {
 
-        public ActTask_Post(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public Task_Post(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<ActTask>> Post(Request<ActTask> request)
+        public async Task<ActionResult<Task_>> Post(Request<Task_> request)
         {            
             try
             {
                 //if (request.Data.CategoryId == 0) throw new Exception("CategoryID is 0");
-                Data.ActTask actTask = request.Data;
+                Data.Task_ actTask = request.Data;
                 actTask.UserId = request.userId;
                 _context.ActTasks.Add(actTask);
                 _context.SaveChanges();

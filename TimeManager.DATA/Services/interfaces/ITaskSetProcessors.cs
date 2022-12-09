@@ -1,6 +1,6 @@
 ﻿namespace TimeManager.DATA.Services.interfaces
 {
-    public interface IActTaskSetProcessors
+    public interface ITaskSetProcessors
     {
     }
 }

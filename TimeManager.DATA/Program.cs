@@ -32,8 +32,8 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IActTaskProcessors, ActTaskProcessors>();
-builder.Services.AddScoped<IActTaskSetProcessors, ActTaskSetProcessors>();
+builder.Services.AddScoped<ITaskProcessors, TaskProcessors>();
+builder.Services.AddScoped<ITaskSetProcessors, TaskSetProcessors>();
 
 builder.Services.AddMQ();
 

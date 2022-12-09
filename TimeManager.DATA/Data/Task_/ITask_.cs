@@ -1,6 +1,6 @@
 ﻿namespace TimeManager.DATA.Data
 {
-    public interface IActTask
+    public interface ITask_
     {
         public int Id { get; set; }
         public string Name { get; set; }

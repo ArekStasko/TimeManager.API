@@ -5,20 +5,20 @@ using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Controllers.ActTaskControllers;
 
-namespace TimeManager.DATA.Processors.actTaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class ActTask_Update : Processor<ActTaskSetController>, IActTask_Update
+    public class Task_Update : Processor<ActTaskSetController>, ITask_Update
     {
-        public ActTask_Update(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public Task_Update(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<ActTask>> Update(Request<Data.ActTask> request)
+        public async Task<ActionResult<Task_>> Update(Request<Data.Task_> request)
         {
             try
             {
                 var act = _context.ActTasks.Single(act => act.Id == request.Data.Id);
                 _context.ActTasks.Remove(act);
 
-                IActTask_Post actTask_Add = new ActTask_Post(_context, _logger);
+                IActTask_Post actTask_Add = new Task_Post(_context, _logger);
                 return await actTask_Add.Post(request);
             }
             catch (Exception ex)

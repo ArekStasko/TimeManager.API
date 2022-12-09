@@ -22,8 +22,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskAdd_Should_AddactTask()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",
@@ -46,8 +46,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskDelete_Should_DeleteactTask()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",
@@ -70,8 +70,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskGetAll_Should_ReturnAllActTasks()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",
@@ -94,8 +94,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskGetByCategory_Should_ReturnActTasksByCategory()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",
@@ -118,8 +118,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskById_Should_ReturnactTaskWithSpecificId()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",
@@ -142,8 +142,8 @@ namespace TimeManager.DATA.Tests
         [Test]
         public void actTaskUpdate_Should_UpdateactTask()
         {
-            var actTaskMock = new Mock<DbSet<ActTask>>();
-            var actTask = new ActTask()
+            var actTaskMock = new Mock<DbSet<Task_>>();
+            var actTask = new Task_()
             {
                 Id = 1,
                 Name = "TestName",

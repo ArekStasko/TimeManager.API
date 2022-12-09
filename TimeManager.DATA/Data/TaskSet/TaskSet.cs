@@ -2,11 +2,11 @@
 
 namespace TimeManager.DATA.Data
 {
-    public interface IActTaskSet
+    public class TaskSet : ITaskSet
     {
         [Key]
         public int Id { get; set; }
         public List<DateTime> TaskOccurencies { get; set; }
-        public ActTask actTask { get; set; }
+        public Task_ actTask { get; set; }
     }
 }

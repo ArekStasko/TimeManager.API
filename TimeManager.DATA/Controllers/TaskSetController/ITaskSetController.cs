@@ -5,9 +5,9 @@ using TimeManager.DATA.Data.Response;
 
 namespace TimeManager.DATA.Controllers.ActTaskSetControllers
 {
-    public interface IActTaskSetController
+    public interface ITaskSetController
     {
-        public Task<ActionResult<Response<List<Task>>>> Update(Request<Data.ActTask> request);
+        public Task<ActionResult<Response<List<Task>>>> Update(Request<Data.Task_> request);
 
     }
 }

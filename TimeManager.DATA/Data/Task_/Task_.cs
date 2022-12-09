@@ -2,7 +2,7 @@
 
 namespace TimeManager.DATA.Data
 {
-    public class ActTask : IActTask
+    public class Task_ : ITask_
     {
         [Key]
         public int Id { get; set; }
