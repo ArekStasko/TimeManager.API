@@ -32,13 +32,7 @@ namespace TimeManager.DATA.Services
             ITask_GetById processor = new Task_GetById(_context, _logger);
             return processor.Execute(actTaskId, userId);
         }
-        /*
-        public Task<ActionResult<Response<List<actTask>>>> GetByCategory(int categoryId, int userId)
-        {
-            IactTask_GetByCategory processor = new actTask_GetByCategory(_context, _logger);
-            return processor.Get(categoryId, userId);
-        }
-        */
+
         public Task<ActionResult<Task_>> ActTask_Post(Request<Data.Task_> request)
         {
             ITask_Post processor = new Task_Post(_context, _logger);

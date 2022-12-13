@@ -18,17 +18,18 @@ namespace TimeManager.DATA.Processors.TaskProcessor
         {            
             try
             {
-                //if (request.Data.CategoryId == 0) throw new Exception("CategoryID is 0");
-                Data.Task_ actTask = request.Data;
+                Task_ actTask = request.Data;
                 actTask.UserId = request.userId;
                 _context.ActTasks.Add(actTask);
                 _context.SaveChanges();
 
+                _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return actTask;
             }
             catch (Exception ex)
             {                
                 _logger.LogError(ex.Message);
+                _logger.LogError($"Stack Trace: {ex.StackTrace}");
                 throw new Exception(ex.Message);
             }
 

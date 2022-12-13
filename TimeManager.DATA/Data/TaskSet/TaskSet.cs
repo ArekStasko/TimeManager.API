@@ -6,6 +6,7 @@ namespace TimeManager.DATA.Data
     {
         [Key]
         public int Id { get; set; }
+        public int UserId { get; set; }
         public List<DateTime> TaskOccurencies { get; set; }
         public Task_ actTask { get; set; }
     }

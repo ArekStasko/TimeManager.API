@@ -12,19 +12,21 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<Task_>> Execute(int actTaskId, int userId)
+        public async Task<ActionResult<Task_>> Execute(int taskId, int userId)
         {
             try
             {
-                var actTask = _context.ActTasks.Single(act => act.Id == actTaskId);
-                _context.ActTasks.Remove(actTask);
+                var task = _context.ActTasks.Single(tsk => tsk.Id == taskId);
+                _context.ActTasks.Remove(task);
                 _context.SaveChanges();
 
-                return actTask;
+                _logger.LogInformation("Successfully completed Task_Delete processor execution");
+                return task;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
+                _logger.LogError($"Stack Trace: {ex.StackTrace}");
                 throw new Exception(ex.Message);
             }
 

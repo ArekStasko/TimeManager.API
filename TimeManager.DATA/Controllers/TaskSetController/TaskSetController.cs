@@ -20,32 +20,6 @@ namespace TimeManager.DATA.Controllers.ActTaskSetControllers
             _mqManager = mqManager;
         }
 
-        [HttpPost(Name = "DeleteDate")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> DeleteDate(Request<Data.Task_> request)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        [HttpPost(Name = "AddDate")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> AddDate(Request<Data.Task_> request)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
         [HttpPost(Name = "GetTaskSetById")]
         public async Task<ActionResult<Response<List<TaskSet>>>> GetById(Request<Data.Task_> request)
         {
