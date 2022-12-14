@@ -1,100 +1,124 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
-using TimeManager.DATA.Processors.TaskProcessor;
-using TimeManager.DATA.Services.interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
+using TimeManager.DATA.Services.Container;
 
 namespace TimeManager.DATA.Controllers.ActTaskSetControllers
 {
-    /*
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TaskSetController : ControllerBase, ITaskSetController
     {
-        private readonly ITaskSetProcessors _processors;
+        private readonly IProcessors _processors;
         private readonly IMQManager _mqManager;
 
-        public TaskSetController(ITaskSetProcessors processors, IMQManager mqManager)
+        public TaskSetController(IProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
             _mqManager = mqManager;
         }
 
         [HttpPost(Name = "GetTaskSetById")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> GetById(Request<Data.Task_> request)
+        public async Task<ActionResult<Response<List<TaskSet>>>> GetById(Request<int> request)
         {
             try
             {
+                var processor = _processors.taskSet_GetById;
+                if(processor == null) throw new ArgumentNullException(nameof(processor));
 
+                return Ok(await processor.Execute(request));
+            }
+            catch(ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
-            { 
-
+            {
+                throw ex;
             }
         }
 
-        [HttpPost(Name = "GetAllTaskSets")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> GetAll (Request<Data.Task_> request)
+        [HttpPost(Name = "GetTaskSets")]
+        public async Task<ActionResult<Response<List<TaskSet>>>> GetAll (Request<string> request)
         {
             try
             {
+                var processor = _processors.taskSet_GetAll;
+                if (processor == null) throw new ArgumentNullException(nameof(processor));
 
+                return Ok(await processor.Execute(request.userId));
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 
         [HttpPost(Name = "DeleteTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Delete(Request<Data.Task_> request)
+        public async Task<ActionResult<Response<List<TaskSet>>>> Delete(Request<TaskSet> request)
         {
             try
             {
+                var processor = _processors.taskSet_Delete;
+                if (processor == null) throw new ArgumentNullException(nameof(processor));
 
+                return Ok(processor.Execute(request));
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 
         [HttpPost(Name = "PostTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Post(Request<Data.Task_> request)
+        public async Task<ActionResult<Response<List<TaskSet>>>> Post(Request<TaskSet> request)
         {
             try
             {
+                var processor = _processors.taskSet_Post;
+                if (processor == null) throw new ArgumentNullException(nameof(processor));
 
+                return Ok(await processor.Execute(request));
+            }
+            catch(ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 
         [HttpPost(Name = "UpdateTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Update(Request<Data.Task_> request)
+        public async Task<ActionResult<Response<List<TaskSet>>>> Update(Request<TaskSet> request)
         {
             try
             {
-                var activity = await _processors.Task_Update(request);
+                var processor = _processors.taskSet_Update;
+                if (processor == null) throw new ArgumentNullException(nameof(processor));
 
-                _mqManager.Publish(
-                    activity,
-                    "entity.activity.update",
-                    "direct",
-                    "Activity_Update"
-                );
-
-                return Ok(activity);
+                return Ok(await processor.Execute(request));
             }
-            catch(Exception ex)
+            catch (ArgumentNullException ex)
             {
-                throw new Exception(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
     }
-    */
 }
