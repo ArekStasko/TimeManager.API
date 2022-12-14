@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data;
 
-namespace TimeManager.DATA.Processors.TaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor.Interfaces
 {
     public interface ITask_Post
     {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
-using TimeManager.DATA.Processors.TaskProcessor;
-using TimeManager.DATA.Services.interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
+using TimeManager.DATA.Services.Container;
 
 namespace TimeManager.DATA.Controllers.ActTaskControllers
 {
@@ -11,42 +10,57 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
     [ApiController]
     public class ActTaskSetController : ControllerBase, IActTaskSetController
     {
-        private readonly ITaskProcessors _processors;
+        private readonly IProcessors _processors;
         private readonly IMQManager _mqManager;
 
-        public ActTaskSetController(ITaskProcessors processors, IMQManager mqManager)
+        public ActTaskSetController(IProcessors processors, IMQManager mqManager)
         {
             _processors = processors;
             _mqManager = mqManager;
         } 
 
 
-        [HttpPost(Name = "GetActivities")]
+        [HttpPost(Name = "GetTasks")]
         public async Task<ActionResult<Response<List<Task>>>> Get(Request<string> request)
         {
-            return Ok(await _processors.ActTask_Get(request.userId));
+            try
+            {
+                var processor = _processors.task_GetAll;
+                if(processor == null) throw new ArgumentNullException(nameof(processor));
+
+                return Ok(await processor.Execute(request.userId));
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
         }
 
-        [HttpPost(Name = "GetActivityById")]
+        [HttpPost(Name = "GetTaskById")]
         public async Task<ActionResult<Response<Task>>> GetById(Request<int> request)
         {
-            return Ok(await _processors.ActTask_GetById(request.Data, request.userId));
+            try
+            {
+                var processor = _processors.task_GetById;
+                if(processor == null) throw new ArgumentNullException(nameof(processor));
+
+                return Ok(await processor.Execute(request.Data, request.userId));
+            }
+            catch(ArgumentNullException ex)
+            {
+                throw ex;
+            }
         }
 
-        /*
-        [HttpPost(Name = "GetActivitiesByCategory")]
-        public async Task<ActionResult<Response<List<Activity>>>> GetByCategory(Request<int> request)
-        {    
-            return Ok(await _processors.GetByCategory(request.Data, request.userId));
-        }
-        */ 
-
-        [HttpPost(Name = "PostActivity")]
+        [HttpPost(Name = "PostTask")]
         public async Task<ActionResult<Response<List<Task>>>> Post(Request<Data.Task_> request)
         {
             try
             {
-                var activity = _processors.ActTask_Post(request);
+                var processor = _processors.task_Post;
+                if(processor == null) throw new ArgumentNullException(nameof(processor));
+
+                var activity = processor.Execute(request);
 
                 _mqManager.Publish(
                     activity,
@@ -55,8 +69,14 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
                     "Activity_Post"
                 );
 
-                var activities = await _processors.ActTask_Get(request.userId);
-                return Ok(activities);
+                var processor_Get = _processors.task_GetAll;
+                if (processor_Get == null) throw new ArgumentNullException(nameof(processor_Get));
+
+                return Ok(await processor_Get.Execute(request.userId));
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
@@ -64,12 +84,15 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
             }
         }
 
-        [HttpDelete(Name = "DeleteActivity")]
+        [HttpDelete(Name = "DeleteTask")]
         public async Task<ActionResult<Response<List<Task>>>> Delete(Request<int> request)
         {
             try
             {
-                var activity = _processors.ActTask_Delete(request.Data, request.userId);
+                var processor = _processors.task_Delete;
+                if(processor == null) throw new ArgumentNullException(nameof(processor));
+
+                var activity = processor.Execute(request.Data, request.userId);
 
                 _mqManager.Publish(
                     activity,
@@ -78,8 +101,14 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
                     "Activity_Delete"
                 );
 
-                var activities = await _processors.ActTask_Get(request.userId);
-                return Ok(activities);
+                var processor_Get = _processors.task_GetAll;
+                if (processor_Get == null) throw new ArgumentNullException(nameof(processor_Get));
+
+                return Ok(await processor_Get.Execute(request.userId));
+            }
+            catch(ArgumentNullException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
@@ -87,12 +116,15 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
             }
         }
 
-        [HttpPost(Name = "UpdateActivity")]
+        [HttpPost(Name = "UpdateTask")]
         public async Task<ActionResult<Response<List<Task>>>> Update(Request<Data.Task_> request)
         {
             try
             {
-                var activity = await _processors.ActTask_Update(request);
+                var processor = _processors.task_Update;
+                if (processor == null) throw new ArgumentNullException(nameof(processor));
+
+                var activity = await processor.Execute(request);
 
                 _mqManager.Publish(
                     activity,
@@ -102,6 +134,10 @@ namespace TimeManager.DATA.Controllers.ActTaskControllers
                 );
 
                 return Ok(activity);
+            }
+            catch(ArgumentException ex)
+            {
+                throw ex;
             }
             catch(Exception ex)
             {

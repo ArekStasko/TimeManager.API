@@ -2,9 +2,8 @@ using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using TimeManager.DATA.Services.interfaces;
-using TimeManager.DATA.Services;
 using TimeManager.DATA.Services.MessageQueuer;
+using TimeManager.DATA.Services.Container;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +20,7 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -33,8 +33,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 
-builder.Services.AddScoped<ITaskProcessors, TaskProcessors>();
-builder.Services.AddScoped<ITaskSetProcessors, TaskSetProcessors>();
+builder.Services.AddScoped<IProcessors, Processors>();
 
 builder.Services.AddMQ();
 

@@ -4,7 +4,7 @@ using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
 
 
-namespace TimeManager.DATA.Processors.TaskProcessor
+namespace TimeManager.DATA.Processors.TaskProcessor.Interfaces
 {
     public interface ITask_Update
     {

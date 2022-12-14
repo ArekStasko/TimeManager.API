@@ -7,6 +7,7 @@ using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Controllers.ActTaskSetControllers
 {
+    /*
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class TaskSetController : ControllerBase, ITaskSetController
@@ -95,4 +96,5 @@ namespace TimeManager.DATA.Controllers.ActTaskSetControllers
         }
 
     }
+    */
 }
