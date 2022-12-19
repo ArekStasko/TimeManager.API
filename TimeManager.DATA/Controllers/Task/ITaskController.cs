@@ -7,11 +7,11 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 {
     public interface ITaskController
     {
-        public Result<List<Task_>> Get(Request<string> request);
-        public Result<Task_> GetById(Request<int> request);
-        public Result<List<Task_>> Post(Request<Task_> request);
-        public Result<List<Task_>> Delete(Request<int> request);
-        public Result<Task_> Update(Request<Task_> request);
+        public Task<IActionResult> Get(Request<string> request);
+        public Task<IActionResult> GetById(Request<int> request);
+        public Task<IActionResult> Post(Request<Task_> request);
+        public Task<IActionResult> Delete(Request<int> request);
+        public Task<IActionResult> Update(Request<Task_> request);
 
     }
 }

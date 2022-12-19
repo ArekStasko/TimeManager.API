@@ -7,6 +7,7 @@ using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Services;
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
+using LanguageExt.Common;
 
 namespace TimeManager.DATA.Processors.TaskProcessor
 {
@@ -15,7 +16,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Post(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<ActionResult<Task_>> Execute(Request<Task_> request)
+        public async Task<Result<bool>> Execute(Request<Task_> request)
         {            
             try
             {
@@ -33,13 +34,13 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
-                return task;
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {                
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                throw new Exception(ex.Message);
+                return new Result<bool>(ex);
             }
 
         }

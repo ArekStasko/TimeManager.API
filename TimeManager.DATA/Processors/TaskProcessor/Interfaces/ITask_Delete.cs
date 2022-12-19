@@ -7,6 +7,6 @@ namespace TimeManager.DATA.Processors.TaskProcessor.Interfaces
 {
     public interface ITask_Delete
     {
-        public Task<Result<Task_>> Execute(int actTaskId, int userId);
+        public Task<Result<bool>> Execute(int actTaskId, int userId);
     }
 }

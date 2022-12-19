@@ -16,31 +16,31 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         public TaskController(IProcessors processors)
         {
             _processors = processors;
-        } 
+        }
 
 
         [HttpPost(Name = "GetTasks")]
         public async Task<IActionResult> Get(Request<string> request)
         {
             var processor = _processors.task_GetAll;
-            if(processor == null) throw new ArgumentNullException(nameof(processor));
+            if (processor == null) throw new ArgumentNullException(nameof(processor));
 
             var result = await processor.Execute(request.userId);
-            
+
             return result.Match<IActionResult>(task =>
             {
                 return CreatedAtAction("Get", task);
-            },exception =>
-            {
-                return BadRequest(exception);
-            });
+            }, exception =>
+             {
+                 return BadRequest(exception);
+             });
         }
 
         [HttpPost(Name = "GetTaskById")]
         public async Task<IActionResult> GetById(Request<int> request)
         {
             var processor = _processors.task_GetById;
-            if(processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
             var result = await processor.Execute(request.Data, request.userId);
 
@@ -54,47 +54,58 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         }
 
         [HttpPost(Name = "PostTask")]
-        public async  Result<List<Task>> Post(Request<Task_> request)
+        public async Task<IActionResult> Post(Request<Task_> request)
         {
-                var processor = _processors.task_Post;
-                if(processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.task_Post;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                var activity = processor.Execute(request);
+            var result = await processor.Execute(request);
 
-                var processor_Get = _processors.task_GetAll;
-                if (processor_Get == null) throw new ArgumentNullException(nameof(processor_Get));
+            return result.Match<IActionResult>(task =>
+            {
+                return CreatedAtAction("Get", task);
+            }, exception =>
+            {
+                return BadRequest(exception);
+            });
 
-                return Ok(processor_Get.Execute(request.userId));
         }
 
         [HttpDelete(Name = "DeleteTask")]
-        public async Result<List<Task_>> Delete(Request<int> request)
+        public async Task<IActionResult> Delete(Request<int> request)
         {
 
-                var processor = _processors.task_Delete;
-                if(processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.task_Delete;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                var result = processor.Execute(request.Data, request.userId);
+            var result = await processor.Execute(request.Data, request.userId);
 
-
-
-                var processor_Get = _processors.task_GetAll;
-                if (processor_Get == null) throw new ArgumentNullException(nameof(processor_Get));
-
-
-                return Ok(processor_Get.Execute(request.userId));
+            return result.Match<IActionResult>(task =>
+            {
+                return CreatedAtAction("Get", task);
+            }, exception =>
+            {
+                return BadRequest(exception);
+            });
         }
 
         [HttpPost(Name = "UpdateTask")]
-        public async Result<Task_> Update(Request<Task_> request)
+        public async Task<IActionResult> Update(Request<Task_> request)
         {
-                var processor = _processors.task_Update;
-                if (processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.task_Update;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                var activity = processor.Execute(request);
+            var result = await processor.Execute(request);
 
-                return Ok(activity);
+            return result.Match<IActionResult>(task =>
+            {
+                return CreatedAtAction("Get", task);
+            }, exception =>
+            {
+                return BadRequest(exception);
+            });
         }
 
     }
+}
 

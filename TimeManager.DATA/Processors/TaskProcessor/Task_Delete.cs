@@ -15,11 +15,11 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Delete(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<Result<Task_>> Execute(int taskId, int userId)
+        public async Task<Result<bool>> Execute(int taskId, int userId)
         {
             try
             {
-                var task = _context.ActTasks.Single(tsk => tsk.Id == taskId);
+                var task = _context.ActTasks.Single(tsk => tsk.Id == taskId && tsk.UserId == userId);
 
                 _mqManager.Publish(
                     task,
@@ -32,13 +32,13 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Delete processor execution");
-                return new Result<Task_>(task);
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                return new Result<Task_>(ex);
+                return new Result<bool>(ex);
             }
 
         }
