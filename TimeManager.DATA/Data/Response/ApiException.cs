@@ -2,11 +2,13 @@
 {
     public class ApiException : IApiException
     {
-        public string Description { get; set; }
+        public int Status { get; }
+        public string Description { get; }
 
-        public ApiException(Exception ex)
+        public ApiException(int status, string description)
         {
-            Description = ex.Message;
+            Status = status;
+            Description = description;
         }
 
     }

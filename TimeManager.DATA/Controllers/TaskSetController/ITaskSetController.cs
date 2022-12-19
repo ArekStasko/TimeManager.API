@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data.Response;
 
 
-namespace TimeManager.DATA.Controllers.ActTaskSetControllers
+namespace TimeManager.DATA.Controllers.TaskSetControllers
 {
     public interface ITaskSetController
     {

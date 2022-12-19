@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using System.Reflection;
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Services.ContainerGenerator
 {
@@ -9,7 +10,6 @@ namespace TimeManager.DATA.Services.ContainerGenerator
         public static IContainer CreateProcessorsContainer()
         {
             var container = new ContainerBuilder();
-            var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == "TimeManager.DATA.Processors.TaskProcessor");
 
             container.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(t => t.Namespace == "TimeManager.DATA.Processors.TaskProcessor" || t.Namespace == "TimeManager.DATA.Processors.TaskSetProcessor")

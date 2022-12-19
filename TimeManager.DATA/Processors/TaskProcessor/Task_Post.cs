@@ -3,29 +3,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
-using TimeManager.DATA.Controllers.ActTaskControllers;
+using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Services;
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
-
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class Task_Post : Processor<ActTaskSetController>, ITask_Post
+    public class Task_Post : Processor<TaskController>, ITask_Post
     {
 
-        public Task_Post(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public Task_Post(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
         public async Task<ActionResult<Task_>> Execute(Request<Task_> request)
         {            
             try
             {
-                Task_ actTask = request.Data;
-                actTask.UserId = request.userId;
-                _context.ActTasks.Add(actTask);
+                Task_ task = request.Data;
+                task.UserId = request.userId;
+
+                _mqManager.Publish(
+                    task,
+                    "entity.activity.post",
+                    "direct",
+                    "Task_Post"
+                );
+
+                _context.ActTasks.Add(task);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
-                return actTask;
+                return task;
             }
             catch (Exception ex)
             {                

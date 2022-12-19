@@ -2,33 +2,43 @@
 using Microsoft.EntityFrameworkCore;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Data.Response;
-using TimeManager.DATA.Controllers.ActTaskControllers;
+using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Services;
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
+using LanguageExt.Common;
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskProcessor
 {
-    public class Task_Delete : Processor<ActTaskSetController>, ITask_Delete
+    public class Task_Delete : Processor<TaskController>, ITask_Delete
     {
 
-        public Task_Delete(DataContext context, ILogger<ActTaskSetController> logger) : base(context, logger) { }
+        public Task_Delete(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<ActionResult<Task_>> Execute(int taskId, int userId)
+        public async Task<Result<Task_>> Execute(int taskId, int userId)
         {
             try
             {
                 var task = _context.ActTasks.Single(tsk => tsk.Id == taskId);
+
+                _mqManager.Publish(
+                    task,
+                    "entity.activity.delete",
+                    "direct",
+                    "Task_Delete"
+                );
+
                 _context.ActTasks.Remove(task);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Delete processor execution");
-                return task;
+                return new Result<Task_>(task);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                throw new Exception(ex.Message);
+                return new Result<Task_>(ex);
             }
 
         }

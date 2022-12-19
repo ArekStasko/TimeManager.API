@@ -2,6 +2,7 @@
 {
     public interface IApiException
     {
-        public string Description { get; set; }
+        public int Status { get; }
+        public string Description { get; }
     }
 }

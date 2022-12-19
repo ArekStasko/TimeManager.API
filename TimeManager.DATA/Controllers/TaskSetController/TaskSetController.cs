@@ -4,7 +4,7 @@ using TimeManager.DATA.Data;
 using TimeManager.DATA.Services.MessageQueuer;
 using TimeManager.DATA.Services.Container;
 
-namespace TimeManager.DATA.Controllers.ActTaskSetControllers
+namespace TimeManager.DATA.Controllers.TaskSetControllers
 {
 
     [Route("api/[controller]/[action]")]

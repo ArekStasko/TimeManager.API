@@ -34,7 +34,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 
 builder.Services.AddScoped<IProcessors, Processors>();
-
 builder.Services.AddMQ();
 
 var app = builder.Build();
@@ -48,6 +47,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
