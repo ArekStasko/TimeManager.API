@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LanguageExt.Common;
+using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data;
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public class TaskSet_Delete : Processor<ITaskSet_Delete>, ITaskSet_Delete
     {
-        public TaskSet_Delete(DataContext context, Logger<ITaskSet_Delete> logger) : base(context, logger) { }
+        public TaskSet_Delete(DataContext context, Logger<ITaskSet_Delete> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<ActionResult<List<TaskSet>>> Execute(Request<TaskSet> request)
+        public async Task<Result<bool>> Execute(Request<TaskSet> request)
         {
             try
             {
@@ -16,13 +18,13 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed TaskSet_Delete processor execution");
-                return _context.ActTaskSets.ToList();
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                throw new Exception(ex.Message);
+                return new Result<bool>(ex);
             }
         }
     }

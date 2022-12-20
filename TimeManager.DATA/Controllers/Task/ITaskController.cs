@@ -1,7 +1,5 @@
 ﻿using TimeManager.DATA.Data;
 using Microsoft.AspNetCore.Mvc;
-using TimeManager.DATA.Data.Response;
-using LanguageExt.Common;
 
 namespace TimeManager.DATA.Controllers.TaskControllers
 {

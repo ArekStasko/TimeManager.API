@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TimeManager.DATA.Data.Response;
 using TimeManager.DATA.Data;
-using TimeManager.DATA.Services.MessageQueuer;
 using TimeManager.DATA.Services.Container;
 
 namespace TimeManager.DATA.Controllers.TaskSetControllers
@@ -12,113 +10,92 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
     public class TaskSetController : ControllerBase, ITaskSetController
     {
         private readonly IProcessors _processors;
-        private readonly IMQManager _mqManager;
 
-        public TaskSetController(IProcessors processors, IMQManager mqManager)
-        {
-            _processors = processors;
-            _mqManager = mqManager;
-        }
+        public TaskSetController(IProcessors processors) => _processors = processors;
 
         [HttpPost(Name = "GetTaskSetById")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> GetById(Request<int> request)
+        public async Task<IActionResult> GetById(Request<int> request)
         {
-            try
-            {
-                var processor = _processors.taskSet_GetById;
-                if(processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.taskSet_GetById;
+            if(processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                return Ok(await processor.Execute(request));
-            }
-            catch(ArgumentNullException ex)
+            var result = await processor.Execute(request);
+
+            return result.Match<IActionResult>(taskSet =>
             {
-                throw ex;
-            }
-            catch (Exception ex)
+                return CreatedAtAction("Get", taskSet);
+            }, exception =>
             {
-                throw ex;
-            }
+                return BadRequest(exception);
+            });
         }
 
         [HttpPost(Name = "GetTaskSets")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> GetAll (Request<string> request)
+        public async Task<IActionResult> GetAll (Request<string> request)
         {
-            try
-            {
-                var processor = _processors.taskSet_GetAll;
-                if (processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.taskSet_GetAll;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                return Ok(await processor.Execute(request.userId));
-            }
-            catch (ArgumentNullException ex)
+            var result = await processor.Execute(request.userId);
+            return result.Match<IActionResult>(taskSet =>
             {
-                throw ex;
-            }
-            catch (Exception ex)
+                return CreatedAtAction("Get", taskSet);
+            }, exception =>
             {
-                throw ex;
-            }
+                return BadRequest(exception);
+            });
         }
 
         [HttpPost(Name = "DeleteTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Delete(Request<TaskSet> request)
+        public async Task<IActionResult> Delete(Request<TaskSet> request)
         {
-            try
-            {
-                var processor = _processors.taskSet_Delete;
-                if (processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.taskSet_Delete;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                return Ok(processor.Execute(request));
-            }
-            catch (ArgumentNullException ex)
+            var result = await processor.Execute(request);
+
+            return result.Match<IActionResult>(success =>
             {
-                throw ex;
-            }
-            catch (Exception ex)
+                return CreatedAtAction("Delete", success);
+            }, exception =>
             {
-                throw ex;
-            }
+                return BadRequest(exception);
+            });
         }
 
         [HttpPost(Name = "PostTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Post(Request<TaskSet> request)
+        public async Task<IActionResult> Post(Request<TaskSet> request)
         {
-            try
-            {
-                var processor = _processors.taskSet_Post;
-                if (processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.taskSet_Post;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                return Ok(await processor.Execute(request));
-            }
-            catch(ArgumentNullException ex)
+            var result = await processor.Execute(request);
+
+            return result.Match<IActionResult>(success =>
             {
-                throw ex;
-            }
-            catch (Exception ex)
+                return CreatedAtAction("Post", success);
+            }, exception =>
             {
-                throw ex;
-            }
+                return BadRequest(exception);
+            });
         }
 
         [HttpPost(Name = "UpdateTaskSet")]
-        public async Task<ActionResult<Response<List<TaskSet>>>> Update(Request<TaskSet> request)
+        public async Task<IActionResult> Update(Request<TaskSet> request)
         {
-            try
-            {
-                var processor = _processors.taskSet_Update;
-                if (processor == null) throw new ArgumentNullException(nameof(processor));
+            var processor = _processors.taskSet_Update;
+            if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-                return Ok(await processor.Execute(request));
-            }
-            catch (ArgumentNullException ex)
+            var result = await processor.Execute(request);
+
+            return result.Match<IActionResult>(success =>
             {
-                throw ex;
-            }
-            catch (Exception ex)
+                return CreatedAtAction("Update", success);
+            }, exception =>
             {
-                throw ex;
+                return BadRequest(exception);
+            });
             }
-        }
 
     }
 }

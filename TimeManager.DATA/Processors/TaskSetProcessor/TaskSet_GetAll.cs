@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LanguageExt.Common;
+using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
@@ -7,20 +8,20 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
     {
         public TaskSet_GetAll(DataContext context, Logger<ITaskSet_GetAll> logger) : base(context, logger) { }
 
-        public async Task<ActionResult<List<TaskSet>>> Execute(int userId)
+        public async Task<Result<List<TaskSet>>> Execute(int userId)
         {
             try
             {
                 var taskSets = _context.ActTaskSets.Where(tsk => tsk.UserId == userId).ToList();
 
                 _logger.LogInformation("Successfully completed TaskSet_GetAll processor execution");
-                return taskSets;
+                return new Result<List<TaskSet>>(taskSets);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                throw new Exception(ex.Message);
+                return new Result<List<TaskSet>>(ex);
             }
         }
     }

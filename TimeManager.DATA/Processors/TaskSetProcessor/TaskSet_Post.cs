@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LanguageExt.Common;
+using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Data;
+using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public class TaskSet_Post : Processor<ITaskSet_Post>, ITaskSet_Post
     {
-        public TaskSet_Post(DataContext context, ILogger<ITaskSet_Post> logger) : base(context, logger) { }
+        public TaskSet_Post(DataContext context, ILogger<ITaskSet_Post> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<ActionResult<TaskSet>> Execute(Request<TaskSet> request)
+        public async Task<Result<bool>> Execute(Request<TaskSet> request)
         {
             try
             {
@@ -18,13 +20,13 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed TaskSet_Post processor execution");
-                return taskSet;
+                return new Result<bool>(true);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 _logger.LogError($"Stack Trace: {ex.StackTrace}");
-                throw new Exception(ex.Message);
+                return new Result<bool>(ex);
             }
         }
     }

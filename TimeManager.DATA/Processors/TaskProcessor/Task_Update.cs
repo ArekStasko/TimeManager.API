@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TimeManager.DATA.Data;
-using TimeManager.DATA.Data.Response;
+﻿using TimeManager.DATA.Data;
 using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
