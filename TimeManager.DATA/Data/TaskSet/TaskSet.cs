@@ -7,7 +7,14 @@ namespace TimeManager.DATA.Data
         [Key]
         public int Id { get; set; }
         public int UserId { get; set; }
-        public List<DateTime> TaskOccurencies { get; set; }
-        public Task_ actTask { get; set; }
+        public List<TaskDate> TaskOccurencies { get; set; }
+        public Task_ Task { get; set; }
+    }
+
+    public class TaskDate
+    {
+        [Key]
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
     }
 }
