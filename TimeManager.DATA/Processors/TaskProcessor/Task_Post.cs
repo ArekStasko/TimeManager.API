@@ -18,6 +18,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 Task_ task = request.Data;
                 task.UserId = request.userId;
 
+
                 _mqManager.Publish(
                     task,
                     "entity.activity.post",
@@ -25,7 +26,9 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     "Task_Post"
                 );
 
-                _context.ActTasks.Add(task);
+                //_mqManager.channel.
+
+                _context.Tasks.Add(task);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");

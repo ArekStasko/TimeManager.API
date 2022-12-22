@@ -14,7 +14,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
         {
             try
             {
-                var task = _context.ActTasks.Single(act => act.Id == request.Data.Id);
+                var task = _context.Tasks.Single(act => act.Id == request.Data.Id);
 
                 _mqManager.Publish(
                     task,
@@ -23,7 +23,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     "Task_Update"
                );
 
-                _context.ActTasks.Remove(task);
+                _context.Tasks.Remove(task);
 
                 _mqManager.Publish(
                     task,
@@ -32,7 +32,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     "Task_Post"
                 );
 
-                _context.ActTasks.Add(task);
+                _context.Tasks.Add(task);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");

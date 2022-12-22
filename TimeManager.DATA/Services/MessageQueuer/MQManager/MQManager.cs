@@ -8,17 +8,17 @@ namespace TimeManager.DATA.Services.MessageQueuer
     public class MQManager : IMQManager
     {
         private readonly DefaultObjectPool<IModel> _objectPool;
+        public IModel channel { get; }
 
         public MQManager(IPooledObjectPolicy<IModel> objectPolicy)
         {
             _objectPool = new DefaultObjectPool<IModel>(objectPolicy, Environment.ProcessorCount * 2);
+            channel = _objectPool.Get();
         }
 
         public void Publish<T>(T message, string exchangeName, string exchangeType, string routeKey) where T : class
         {
             if (message == null) return;
-
-            var channel = _objectPool.Get();
 
             try
             {
@@ -27,6 +27,7 @@ namespace TimeManager.DATA.Services.MessageQueuer
 
                 var properties = channel.CreateBasicProperties();
                 properties.Persistent = true;
+                properties.ReplyTo = exchangeName;
 
                 channel.BasicPublish(
                     exchangeName,

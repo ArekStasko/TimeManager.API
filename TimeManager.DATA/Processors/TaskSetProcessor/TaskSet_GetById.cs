@@ -12,7 +12,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
         {
             try
             {
-                var taskSet = _context.ActTaskSets.Single(tsk => tsk.Id == request.Data && tsk.UserId == request.userId);
+                var taskSet = _context.TaskSets.Single(tsk => tsk.Id == request.Data && tsk.UserId == request.userId);
 
                 _logger.LogInformation("Successfully completed TaskSet_GetById processor execution");
                 return new Result<TaskSet>(taskSet);

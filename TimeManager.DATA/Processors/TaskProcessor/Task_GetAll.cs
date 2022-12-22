@@ -12,7 +12,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
         {
             try
             {
-                var tasks = _context.ActTasks.ToList();
+                var tasks = _context.Tasks.ToList();
                 tasks = tasks.Where(a => a.UserId == userId).ToList();
                 return new Result<List<Task_>>(tasks);
             }

@@ -13,8 +13,8 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
         {
             try
             {
-                var taskSet = _context.ActTaskSets.Single(tsk => tsk.Id == request.Data.Id);
-                _context.ActTaskSets.Remove(taskSet);
+                var taskSet = _context.TaskSets.Single(tsk => tsk.Id == request.Data.Id);
+                _context.TaskSets.Remove(taskSet);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed TaskSet_Delete processor execution");

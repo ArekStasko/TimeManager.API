@@ -14,7 +14,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
         {
             try
             {
-                var ActTasks = await _context.ActTasks.ToListAsync();
+                var ActTasks = await _context.Tasks.ToListAsync();
                 var actTask = ActTasks.Single(act => act.Id == actTaskId && act.UserId == userId);
                 
                 return new Result<Task_>(actTask);

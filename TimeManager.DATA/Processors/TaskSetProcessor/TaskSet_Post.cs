@@ -16,7 +16,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
             {
                 TaskSet taskSet = request.Data;
                 taskSet.UserId = request.userId;
-                _context.ActTaskSets.Add(taskSet);
+                _context.TaskSets.Add(taskSet);
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed TaskSet_Post processor execution");
