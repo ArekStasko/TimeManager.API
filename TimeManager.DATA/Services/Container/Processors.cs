@@ -2,12 +2,18 @@
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
 using TimeManager.DATA.Processors.TaskSetProcessor;
 using Autofac;
+using TimeManager.DATA.Data;
+using TimeManager.DATA.Controllers.TaskControllers;
+using TimeManager.DATA.Services.MessageQueuer;
+using TimeManager.DATA.Controllers.TaskSetControllers;
 
 namespace TimeManager.DATA.Services.Container
 {
     public class Processors : IProcessors
     {
-        private IContainer _container { get; } = ContainerFactory.CreateProcessorsContainer();
+        public Processors(DataContext context, ILogger<TaskController> taskLogger, ILogger<TaskSetController> taskSetLogger, IMQManager mqManager) => _container = ContainerFactory.CreateProcessorsContainer(context, taskLogger, taskSetLogger, mqManager);
+        
+        private IContainer _container { get; } 
 
         public ITaskSet_Delete taskSet_Delete { get => _container.Resolve<ITaskSet_Delete>(); }
         public ITaskSet_GetAll taskSet_GetAll { get => _container.Resolve<ITaskSet_GetAll>(); }
