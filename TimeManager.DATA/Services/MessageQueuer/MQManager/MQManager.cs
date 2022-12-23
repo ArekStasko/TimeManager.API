@@ -27,7 +27,7 @@ namespace TimeManager.DATA.Services.MessageQueuer
 
                 var properties = channel.CreateBasicProperties();
                 properties.Persistent = true;
-                properties.ReplyTo = exchangeName;
+                properties.ReplyTo = exchangeName+"-reply";
 
                 channel.BasicPublish(
                     exchangeName,

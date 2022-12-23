@@ -21,9 +21,9 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
                 _mqManager.Publish(
                     task,
-                    "entity.activity.post",
+                    "entity.task.post",
                     "direct",
-                    "Task_Post"
+                    "task_Post"
                 );
 
                 //_mqManager.channel.
