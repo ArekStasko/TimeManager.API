@@ -19,14 +19,14 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 task.UserId = request.userId;
 
 
-                _mqManager.Publish(
+                bool succ =  _mqManager.Publish(
                     task,
                     "entity.task.post",
                     "direct",
                     "task_Post"
                 );
 
-                //_mqManager.channel.
+                if (!succ) return new Result<bool>(false);
 
                 _context.Tasks.Add(task);
                 _context.SaveChanges();
