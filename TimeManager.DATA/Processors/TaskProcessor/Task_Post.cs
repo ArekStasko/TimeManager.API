@@ -18,18 +18,22 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 Task_ task = request.Data;
                 task.UserId = request.userId;
 
+                _context.Tasks.Add(task);
+                _context.SaveChanges();
 
-                bool succ =  _mqManager.Publish(
+                bool succ = _mqManager.Publish(
                     task,
                     "entity.task.post",
                     "direct",
                     "task_Post"
                 );
 
-                if (!succ) return new Result<bool>(false);
-
-                _context.Tasks.Add(task);
-                _context.SaveChanges();
+                if (!succ)
+                {
+                    _context.Tasks.Remove(task);
+                    _context.SaveChanges();
+                    return new Result<bool>(false);
+                }
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return new Result<bool>(true);

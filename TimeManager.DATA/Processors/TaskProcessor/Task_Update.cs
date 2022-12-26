@@ -16,25 +16,24 @@ namespace TimeManager.DATA.Processors.TaskProcessor
             {
                 var task = _context.Tasks.Single(act => act.Id == request.Data.Id);
 
-                _mqManager.Publish(
-                    task,
-                    "entity.activity.update",
-                    "direct",
-                    "Task_Update"
-               );
-
                 _context.Tasks.Remove(task);
 
-                _mqManager.Publish(
-                    task,
-                    "entity.activity.post",
-                    "direct",
-                    "Task_Post"
-                );
-
-                _context.Tasks.Add(task);
+                _context.Tasks.Add(request.Data);
                 _context.SaveChanges();
 
+                bool succ = _mqManager.Publish(
+                    task,
+                    "entity.task.update",
+                    "direct",
+                    "task_Update"
+               );
+
+                if (!succ)
+                {
+                    _context.Tasks.Remove(request.Data);
+                    _context.Tasks.Add(task);
+                    return new Result<bool>(false);
+                }
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return new Result<bool>(true);
             }
