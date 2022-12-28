@@ -23,7 +23,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
 
             return result.Match<IActionResult>(taskSet =>
             {
-                return CreatedAtAction("Get", taskSet);
+                return CreatedAtAction(nameof(GetById), taskSet);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -39,7 +39,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
             var result = await processor.Execute(request.userId);
             return result.Match<IActionResult>(taskSet =>
             {
-                return CreatedAtAction("Get", taskSet);
+                return CreatedAtAction(nameof(GetAll), taskSet);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -56,7 +56,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
 
             return result.Match<IActionResult>(success =>
             {
-                return CreatedAtAction("Delete", success);
+                return CreatedAtAction(nameof(Delete), success);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -73,7 +73,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
 
             return result.Match<IActionResult>(success =>
             {
-                return CreatedAtAction("Post", success);
+                return CreatedAtAction(nameof(Post), success);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -90,7 +90,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
 
             return result.Match<IActionResult>(success =>
             {
-                return CreatedAtAction("Update", success);
+                return CreatedAtAction(nameof(Update), success);
             }, exception =>
             {
                 return BadRequest(exception);

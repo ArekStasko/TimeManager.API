@@ -27,7 +27,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 
             return result.Match<IActionResult>(task =>
             {
-                return CreatedAtAction("Get", task);
+                return CreatedAtAction(nameof(Get), task);
             }, exception =>
              {
                  return BadRequest(exception);
@@ -44,7 +44,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 
             return result.Match<IActionResult>(task =>
             {
-                return CreatedAtAction("Get", task);
+                return CreatedAtAction(nameof(GetById), task);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -61,7 +61,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 
             return result.Match<IActionResult>(task =>
             {
-                return CreatedAtAction("Get", task);
+                return CreatedAtAction(nameof(Post), task);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -80,7 +80,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 
             return result.Match<IActionResult>(task =>
             {
-                return CreatedAtAction("Get", task);
+                return CreatedAtAction(nameof(Delete), task);
             }, exception =>
             {
                 return BadRequest(exception);
@@ -97,7 +97,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 
             return result.Match<IActionResult>(task =>
             {
-                return CreatedAtAction("Get", task);
+                return CreatedAtAction(nameof(Update), task);
             }, exception =>
             {
                 return BadRequest(exception);

@@ -36,6 +36,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<IProcessors, Processors>();
 builder.Services.AddMQ();
 
+builder.Services.AddMvc(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
 var app = builder.Build();
 
 DatabaseManagerService.MigrationInitialization(app);
