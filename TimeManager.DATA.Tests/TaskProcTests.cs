@@ -11,7 +11,7 @@ using TimeManager.DATA.Tests.Data;
 
 namespace TimeManager.DATA.Tests
 {
-    public class actTaskProcTests
+    public class TaskProcTests
     {
         private Mock<DbSet<Task_>> GetMockDbSet()
         {
@@ -131,8 +131,8 @@ namespace TimeManager.DATA.Tests
             _ = result.Result.Match<bool>(succ =>
             {
                 Assert.IsTrue(succ);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once());
-                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once());
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once);
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
             {
@@ -171,8 +171,8 @@ namespace TimeManager.DATA.Tests
             _ = result.Result.Match<bool>(succ =>
             {
                 Assert.IsFalse(succ);
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once());
-                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Exactly(2));
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once);
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
             {
@@ -198,8 +198,8 @@ namespace TimeManager.DATA.Tests
             _ = result.Result.Match<bool>(succ =>
             {
                 Assert.IsTrue(succ);
-                mockSet.Verify(tsk => tsk.Remove(TaskToDelete), Times.Once());
-                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once());
+                mockSet.Verify(tsk => tsk.Remove(TaskToDelete), Times.Once);
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
             {
@@ -225,9 +225,67 @@ namespace TimeManager.DATA.Tests
             _ = result.Result.Match<bool>(succ =>
             {
                 Assert.IsFalse(succ);
-                mockSet.Verify(tsk => tsk.Remove(TaskToDelete), Times.Once());
-                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once());
-                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Exactly(2));
+                mockSet.Verify(tsk => tsk.Remove(TaskToDelete), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once);
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
+                return true;
+            }, exception =>
+            {
+                Assert.Fail(exception.Message);
+                return false;
+            });
+        }
+
+        [Test]
+        public void TaskUpdate_Should_UpdateTask()
+        {
+
+            var mockSet = GetMockDbSet();
+            var TaskToUpdate = mockSet.Object.Single(tsk => tsk.Id == 1 && tsk.UserId == 1);
+
+            var mockContext = new Mock<DataContext>();
+            mockContext.Setup(t => t.Tasks).Returns(mockSet.Object);
+
+            var service = new Task_Update(mockContext.Object, new MockLogger<TaskController>(), new MockMQ_True());
+
+            var result = service.Execute(new Request<Task_>() { Data = TaskToUpdate, userId = 1});
+
+            Assert.True(result != null);
+            _ = result.Result.Match<bool>(succ =>
+            {
+                Assert.IsTrue(succ);
+                mockSet.Verify(tsk => tsk.Remove(TaskToUpdate), Times.Once);
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Once);
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
+                return true;
+            }, exception =>
+            {
+                Assert.Fail(exception.Message);
+                return false;
+            });
+        }
+
+        [Test]
+        public void TaskUpdate_ShouldNot_UpdateTask()
+        {
+
+            var mockSet = GetMockDbSet();
+            var TaskToUpdate = mockSet.Object.Single(tsk => tsk.Id == 1 && tsk.UserId == 1);
+
+            var mockContext = new Mock<DataContext>();
+            mockContext.Setup(t => t.Tasks).Returns(mockSet.Object);
+
+            var service = new Task_Update(mockContext.Object, new MockLogger<TaskController>(), new MockMQ_False());
+
+            var result = service.Execute(new Request<Task_>() { Data = TaskToUpdate, userId = 1 });
+
+            Assert.True(result != null);
+            _ = result.Result.Match<bool>(succ =>
+            {
+                Assert.IsFalse(succ);
+                mockSet.Verify(tsk => tsk.Remove(TaskToUpdate), Times.Exactly(2));
+                mockSet.Verify(tsk => tsk.Add(It.IsAny<Task_>()), Times.Exactly(2));
+                mockContext.Verify(tsk => tsk.SaveChanges(), Times.Once);
                 return true;
             }, exception =>
             {
@@ -247,7 +305,7 @@ namespace TimeManager.DATA.Tests
             var service = new Task_GetAll(mockContext.Object, new MockLogger<TaskController>());
 
             var result = service.Execute(userId: 1);
-            
+
             Assert.True(result != null);
             _ = result.Result.Match<bool>(tasks =>
             {
@@ -283,13 +341,6 @@ namespace TimeManager.DATA.Tests
                 Assert.Fail(exception.Message);
                 return false;
             });
-        }
-
-        [Test]
-        public void TaskUpdate_Should_UpdateTask()
-        {
-
-            Assert.Fail();
         }
     }
 }

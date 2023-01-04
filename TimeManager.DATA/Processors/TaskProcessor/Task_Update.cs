@@ -10,7 +10,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_Update(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<Result<bool>> Execute(Request<Data.Task_> request)
+        public async Task<Result<bool>> Execute(Request<Task_> request)
         {
             try
             {
@@ -19,7 +19,6 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 _context.Tasks.Remove(task);
 
                 _context.Tasks.Add(request.Data);
-                _context.SaveChanges();
 
                 bool succ = _mqManager.Publish(
                     task,
@@ -32,8 +31,12 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 {
                     _context.Tasks.Remove(request.Data);
                     _context.Tasks.Add(task);
+                    _context.SaveChanges();
                     return new Result<bool>(false);
                 }
+
+                _context.SaveChanges();
+
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return new Result<bool>(true);
             }

@@ -19,7 +19,6 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 task.UserId = request.userId;
 
                 _context.Tasks.Add(task);
-                _context.SaveChanges();
 
                 bool succ = _mqManager.Publish(
                     task,
@@ -34,6 +33,8 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     _context.SaveChanges();
                     return new Result<bool>(false);
                 }
+
+                _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return new Result<bool>(true);

@@ -18,7 +18,6 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 var task = _context.Tasks.Single(tsk => tsk.Id == taskId && tsk.UserId == userId);
 
                 _context.Tasks.Remove(task);
-                _context.SaveChanges();
 
                 bool succ = _mqManager.Publish(
                     task,
@@ -33,6 +32,8 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     _context.SaveChanges();
                     return new Result<bool>(false);
                 }
+
+                _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed Task_Delete processor execution");
                 return new Result<bool>(true);
