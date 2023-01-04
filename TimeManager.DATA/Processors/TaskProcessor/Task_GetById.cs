@@ -10,14 +10,14 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_GetById(DataContext context, ILogger<TaskController> logger) : base(context, logger) { }
 
-        public async Task<Result<Task_>> Execute(int actTaskId, int userId)
+        public async Task<Result<Task_>> Execute(int taskId, int userId)
         {
             try
             {
-                var ActTasks = await _context.Tasks.ToListAsync();
-                var actTask = ActTasks.Single(act => act.Id == actTaskId && act.UserId == userId);
+                var tasks = _context.Tasks.ToList();
+                var task = tasks.Single(tsk => tsk.Id == taskId && tsk.UserId == userId);
                 
-                return new Result<Task_>(actTask);
+                return new Result<Task_>(task);
             }
             catch (Exception ex)
             {

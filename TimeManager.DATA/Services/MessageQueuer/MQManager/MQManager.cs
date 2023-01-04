@@ -12,7 +12,7 @@ namespace TimeManager.DATA.Services.MessageQueuer
     {
         private readonly DefaultObjectPool<IModel> _objectPool;
         private readonly BlockingCollection<bool> resp = new BlockingCollection<bool>();
-        public IModel channel { get; }
+        private IModel channel { get; }
 
         public MQManager(IPooledObjectPolicy<IModel> objectPolicy)
         {
