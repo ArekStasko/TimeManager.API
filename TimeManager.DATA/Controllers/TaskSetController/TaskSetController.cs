@@ -19,7 +19,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
             var processor = _processors.taskSet_GetById;
             if(processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-            var result = await processor.Execute(request);
+            var result = await processor.Execute(request.Data, request.userId);
 
             return result.Match<IActionResult>(taskSet =>
             {
@@ -52,7 +52,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
             var processor = _processors.taskSet_Delete;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-            var result = await processor.Execute(request);
+            var result = await processor.Execute(request.Data.Id, request.userId);
 
             return result.Match<IActionResult>(success =>
             {

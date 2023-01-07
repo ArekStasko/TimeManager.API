@@ -6,6 +6,6 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public interface ITaskSet_GetById
     {
-        public Task<Result<TaskSet>> Execute(Request<int> request);
+        public Task<Result<TaskSet>> Execute(int taskSetId, int userId);
     }
 }

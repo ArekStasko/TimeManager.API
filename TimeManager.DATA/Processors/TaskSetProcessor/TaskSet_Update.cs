@@ -7,7 +7,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public class TaskSet_Update : Processor<ITaskSet_Update>, ITaskSet_Update
     {
-        public TaskSet_Update(DataContext context, Logger<ITaskSet_Update> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
+        public TaskSet_Update(DataContext context, ILogger<ITaskSet_Update> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
         public async Task<Result<bool>> Execute(Request<TaskSet> request)
         {
@@ -15,10 +15,23 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
             {
                 var taskSet = _context.TaskSets.Single(tsk => tsk.Id == request.Data.Id);
                 _context.TaskSets.Remove(taskSet);
+                _context.TaskSets.Add(request.Data);
 
-                taskSet = request.Data;
-                taskSet.UserId = request.userId;
-                _context.TaskSets.Add(taskSet);
+                bool succ = _mqManager.Publish(
+                   taskSet,
+                   "entity.taskSet.update",
+                   "direct",
+                   "taskSet_Update"
+               );
+
+                if (!succ)
+                {
+                    _context.TaskSets.Remove(request.Data);
+                    _context.TaskSets.Add(taskSet);
+                    _context.SaveChanges();
+                    return new Result<bool>(false);
+                }
+
                 _context.SaveChanges();
 
                 _logger.LogInformation("Successfully completed TaskSet_Update processor execution");

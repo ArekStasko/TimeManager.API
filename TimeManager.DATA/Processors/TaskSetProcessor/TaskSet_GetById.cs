@@ -6,13 +6,13 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public class TaskSet_GetById : Processor<ITaskSet_GetById>, ITaskSet_GetById
     {
-        public TaskSet_GetById(DataContext context, Logger<ITaskSet_GetById> logger) : base(context, logger) { }
+        public TaskSet_GetById(DataContext context, ILogger<ITaskSet_GetById> logger) : base(context, logger) { }
 
-        public async Task<Result<TaskSet>> Execute(Request<int> request)
+        public async Task<Result<TaskSet>> Execute(int taskSetId, int userId)
         {
             try
             {
-                var taskSet = _context.TaskSets.Single(tsk => tsk.Id == request.Data && tsk.UserId == request.userId);
+                var taskSet = _context.TaskSets.Single(tsk => tsk.Id == taskSetId && tsk.UserId == userId);
 
                 _logger.LogInformation("Successfully completed TaskSet_GetById processor execution");
                 return new Result<TaskSet>(taskSet);

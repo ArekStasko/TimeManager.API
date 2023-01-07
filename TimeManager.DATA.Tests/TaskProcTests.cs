@@ -307,9 +307,9 @@ namespace TimeManager.DATA.Tests
             var result = service.Execute(userId: 1);
 
             Assert.True(result != null);
-            _ = result.Result.Match<bool>(tasks =>
+            _ = result.Result.Match<bool>(taskSets =>
             {
-                foreach (var task in tasks) Assert.AreEqual(1, task.UserId);
+                foreach (var taskSet in taskSets) Assert.AreEqual(1, taskSet.UserId);
                 return true;
             }, exception =>
             {
