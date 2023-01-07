@@ -18,7 +18,19 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
                 taskSet.UserId = request.userId;
                 _context.TaskSets.Add(taskSet);
 
-                
+                bool succ = _mqManager.Publish(
+                   taskSet,
+                   "entity.taskSet.post",
+                   "direct",
+                   "taskSet_Post"
+               );
+
+                if (!succ)
+                {
+                    _context.TaskSets.Remove(taskSet);
+                    _context.SaveChanges();
+                    return new Result<bool>(false);
+                }
 
                 _context.SaveChanges();
 
