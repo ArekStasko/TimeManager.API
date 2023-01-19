@@ -113,7 +113,7 @@ namespace TimeManager.DATA.Tests
             var mockContext = new Mock<DataContext>();
             mockContext.Setup(t => t.TaskSets).Returns(mockSet.Object);
 
-            var service = new TaskSet_Post(mockContext.Object, new MockLogger<ITaskSet_Post>(), new MockMQ_True());
+            var service = new TaskSet_Post(mockContext.Object, new MockLogger<TaskSetController>(), new MockMQ_True());
 
             var testTask = new TaskSet
             {
@@ -166,7 +166,7 @@ namespace TimeManager.DATA.Tests
             var mockContext = new Mock<DataContext>();
             mockContext.Setup(t => t.TaskSets).Returns(mockSet.Object);
 
-            var service = new TaskSet_Delete(mockContext.Object, new MockLogger<ITaskSet_Delete>(), new MockMQ_True());
+            var service = new TaskSet_Delete(mockContext.Object, new MockLogger<TaskSetController>(), new MockMQ_True());
 
             var result = service.Execute(taskSetId: TaskToDelete.Id, userId: TaskToDelete.UserId);
 
@@ -195,7 +195,7 @@ namespace TimeManager.DATA.Tests
             var mockContext = new Mock<DataContext>();
             mockContext.Setup(t => t.TaskSets).Returns(mockSet.Object);
 
-            var service = new TaskSet_Update(mockContext.Object, new MockLogger<ITaskSet_Update>(), new MockMQ_True());
+            var service = new TaskSet_Update(mockContext.Object, new MockLogger<TaskSetController>(), new MockMQ_True());
 
             var result = service.Execute(new Request<TaskSet> { Data = TaskToUpdate, userId = 1});
 
@@ -222,7 +222,7 @@ namespace TimeManager.DATA.Tests
             var mockContext = new Mock<DataContext>();
             mockContext.Setup(t => t.TaskSets).Returns(mockSet.Object);
 
-            var service = new TaskSet_GetAll(mockContext.Object, new MockLogger<ITaskSet_GetAll>());
+            var service = new TaskSet_GetAll(mockContext.Object, new MockLogger<TaskSetController>());
 
             var result = service.Execute(userId: 1);
 
@@ -246,7 +246,7 @@ namespace TimeManager.DATA.Tests
             var mockContext = new Mock<DataContext>();
             mockContext.Setup(t => t.TaskSets).Returns(mockSet.Object);
 
-            var service = new TaskSet_GetById(mockContext.Object, new MockLogger<ITaskSet_GetById>());
+            var service = new TaskSet_GetById(mockContext.Object, new MockLogger<TaskSetController>());
 
             var result = service.Execute(taskSetId: 2, userId: 2);
 

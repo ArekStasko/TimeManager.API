@@ -1,13 +1,14 @@
 ﻿using LanguageExt.Common;
 using Microsoft.AspNetCore.Mvc;
+using TimeManager.DATA.Controllers.TaskSetControllers;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
-    public class TaskSet_Update : Processor<ITaskSet_Update>, ITaskSet_Update
+    public class TaskSet_Update : Processor<TaskSetController>, ITaskSet_Update
     {
-        public TaskSet_Update(DataContext context, ILogger<ITaskSet_Update> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
+        public TaskSet_Update(DataContext context, ILogger<TaskSetController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
         public async Task<Result<bool>> Execute(Request<TaskSet> request)
         {

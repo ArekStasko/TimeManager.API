@@ -1,12 +1,13 @@
 ﻿using LanguageExt.Common;
 using Microsoft.AspNetCore.Mvc;
+using TimeManager.DATA.Controllers.TaskSetControllers;
 using TimeManager.DATA.Data;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
-    public class TaskSet_GetById : Processor<ITaskSet_GetById>, ITaskSet_GetById
+    public class TaskSet_GetById : Processor<TaskSetController>, ITaskSet_GetById
     {
-        public TaskSet_GetById(DataContext context, ILogger<ITaskSet_GetById> logger) : base(context, logger) { }
+        public TaskSet_GetById(DataContext context, ILogger<TaskSetController> logger) : base(context, logger) { }
 
         public async Task<Result<TaskSet>> Execute(int taskSetId, int userId)
         {

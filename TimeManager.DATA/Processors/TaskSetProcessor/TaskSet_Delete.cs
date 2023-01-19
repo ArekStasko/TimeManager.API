@@ -1,13 +1,14 @@
 ﻿using LanguageExt.Common;
 using Microsoft.AspNetCore.Mvc;
+using TimeManager.DATA.Controllers.TaskSetControllers;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Services.MessageQueuer;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
-    public class TaskSet_Delete : Processor<ITaskSet_Delete>, ITaskSet_Delete
+    public class TaskSet_Delete : Processor<TaskSetController>, ITaskSet_Delete
     {
-        public TaskSet_Delete(DataContext context, ILogger<ITaskSet_Delete> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
+        public TaskSet_Delete(DataContext context, ILogger<TaskSetController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
         public async Task<Result<bool>> Execute(int taskSetId, int userId)
         {
