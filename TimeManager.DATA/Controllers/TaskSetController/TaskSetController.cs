@@ -7,7 +7,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
 
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class TaskSetController : ControllerBase, ITaskSetController
+    public class TaskSetController : ControllerBase
     {
         private readonly IProcessors _processors;
 

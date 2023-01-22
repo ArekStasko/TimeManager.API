@@ -7,7 +7,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class TaskController : ControllerBase, ITaskController
+    public class TaskController : ControllerBase
     {
         private readonly IProcessors _processors;
 
