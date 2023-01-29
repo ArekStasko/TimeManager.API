@@ -14,5 +14,6 @@ namespace TimeManager.DATA.Data
         public DateTime Deadline { get; set; }
         public int Priority { get; set; }
         public int UserId { get; set; }
+        public bool Completed { get; set; } = false;
     }
 }

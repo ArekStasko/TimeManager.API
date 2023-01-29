@@ -15,13 +15,26 @@ namespace TimeManager.DATA.Processors.TaskProcessor
             try
             {
                 var task = _context.Tasks.Single(act => act.Id == request.Data.Id);
-
+                var data = request.Data;
+                
+                Task_ updatedTask = new Task_()
+                {
+                    Name = data.Name,
+                    Description = data.Description,
+                    Type = data.Type,
+                    DateAdded = data.DateAdded,
+                    DateCompleted = data.DateCompleted,
+                    Deadline = data.Deadline,
+                    Priority = data.Priority,
+                    Completed = data.Completed,
+                    UserId = request.userId
+                };
+                
                 _context.Tasks.Remove(task);
-
-                _context.Tasks.Add(request.Data);
+                _context.Tasks.Add(updatedTask);
 
                 bool succ = _mqManager.Publish(
-                    task,
+                    updatedTask,
                     "entity.task.update",
                     "direct",
                     "task_Update"
@@ -29,7 +42,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
                 if (!succ)
                 {
-                    _context.Tasks.Remove(request.Data);
+                    _context.Tasks.Remove(updatedTask);
                     _context.Tasks.Add(task);
                     _context.SaveChanges();
                     return new Result<bool>(false);

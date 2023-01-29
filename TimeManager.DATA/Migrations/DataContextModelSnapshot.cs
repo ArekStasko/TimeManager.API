@@ -30,6 +30,9 @@ namespace TimeManager.DATA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 

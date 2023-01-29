@@ -2,14 +2,15 @@
 {
     public interface ITask_
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
-        public DateTime DateAdded { get; set; }
-        public DateTime DateCompleted { get; set; }
-        public DateTime Deadline { get; set; }
-        public int Priority { get; set; }
-        public int UserId { get; set; }
+        int Id { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+        string Type { get; set; }
+        DateTime DateAdded { get; set; }
+        DateTime DateCompleted { get; set; }
+        DateTime Deadline { get; set; }
+        int Priority { get; set; }
+        int UserId { get; set; }
+        bool Completed { get; set; }
     }
 }
