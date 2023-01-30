@@ -27,12 +27,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     "task_Post"
                 );
 
-                if (!succ)
-                {
-                    _context.Tasks.Remove(task);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
 
                 _context.SaveChanges();
 

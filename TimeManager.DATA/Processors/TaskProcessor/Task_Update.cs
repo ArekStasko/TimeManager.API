@@ -15,38 +15,25 @@ namespace TimeManager.DATA.Processors.TaskProcessor
             try
             {
                 var task = _context.Tasks.Single(act => act.Id == request.Data.Id);
-                var data = request.Data;
                 
-                Task_ updatedTask = new Task_()
-                {
-                    Name = data.Name,
-                    Description = data.Description,
-                    Type = data.Type,
-                    DateAdded = data.DateAdded,
-                    DateCompleted = data.DateCompleted,
-                    Deadline = data.Deadline,
-                    Priority = data.Priority,
-                    Completed = data.Completed,
-                    UserId = request.userId
-                };
-                
-                _context.Tasks.Remove(task);
-                _context.Tasks.Add(updatedTask);
+                task.Name = request.Data.Name;
+                task.Description = request.Data.Description;
+                task.Type = request.Data.Type;
+                task.DateAdded = request.Data.DateAdded;
+                task.DateCompleted = request.Data.DateCompleted;
+                task.Deadline = request.Data.Deadline;
+                task.Priority = request.Data.Priority;
+                task.Completed = request.Data.Completed;
+                task.UserId = request.userId;
 
                 bool succ = _mqManager.Publish(
-                    updatedTask,
+                    task,
                     "entity.task.update",
                     "direct",
                     "task_Update"
                );
 
-                if (!succ)
-                {
-                    _context.Tasks.Remove(updatedTask);
-                    _context.Tasks.Add(task);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
 
                 _context.SaveChanges();
 

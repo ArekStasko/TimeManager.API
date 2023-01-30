@@ -24,12 +24,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
                    "taskSet_Delete"
                );
 
-                if (!succ)
-                {
-                    _context.TaskSets.Add(taskSet);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
 
                 _context.SaveChanges();
 

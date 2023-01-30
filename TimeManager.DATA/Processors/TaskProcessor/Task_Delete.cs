@@ -26,12 +26,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                     "task_Delete"
                 );
 
-                if (!succ)
-                {
-                    _context.Tasks.Add(task);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
 
                 _context.SaveChanges();
 

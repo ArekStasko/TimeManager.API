@@ -25,13 +25,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
                    "taskSet_Update"
                );
 
-                if (!succ)
-                {
-                    _context.TaskSets.Remove(request.Data);
-                    _context.TaskSets.Add(taskSet);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
 
                 _context.SaveChanges();
 
