@@ -6,6 +6,6 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public interface ITaskSet_Delete
     {
-        public Task<Result<bool>> Execute(int taskSetId, int userId);
+        public Task<Result<bool>> Execute(Guid taskSetId, int userId);
     }
 }

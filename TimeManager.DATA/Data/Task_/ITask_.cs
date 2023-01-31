@@ -2,7 +2,7 @@
 {
     public interface ITask_
     {
-        int Id { get; set; }
+        Guid Id { get; set; }
         string Name { get; set; }
         string Description { get; set; }
         string Type { get; set; }

@@ -16,6 +16,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
             try
             {
                 TaskSet taskSet = request.Data;
+                taskSet.Id = new Guid();
                 taskSet.UserId = request.userId;
                 _context.TaskSets.Add(taskSet);
 

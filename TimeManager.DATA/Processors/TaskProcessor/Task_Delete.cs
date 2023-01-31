@@ -11,7 +11,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
 
         public Task_Delete(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<Result<bool>> Execute(int taskId, int userId)
+        public async Task<Result<bool>> Execute(Guid taskId, int userId)
         {
             try
             {

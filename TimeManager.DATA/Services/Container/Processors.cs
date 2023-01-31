@@ -2,6 +2,7 @@
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
 using TimeManager.DATA.Processors.TaskSetProcessor;
 using Autofac;
+using AutoMapper;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Services.MessageQueuer;
@@ -11,7 +12,7 @@ namespace TimeManager.DATA.Services.Container
 {
     public class Processors : IProcessors
     {
-        public Processors(DataContext context, ILogger<TaskController> taskLogger, ILogger<TaskSetController> taskSetLogger, IMQManager mqManager) => _container = ContainerFactory.CreateProcessorsContainer(context, taskLogger, taskSetLogger, mqManager);
+        public Processors(DataContext context, ILogger<TaskController> taskLogger, ILogger<TaskSetController> taskSetLogger, IMQManager mqManager, IMapper mapper) => _container = ContainerFactory.CreateProcessorsContainer(context, taskLogger, taskSetLogger, mqManager, mapper);
         
         private IContainer _container { get; } 
 

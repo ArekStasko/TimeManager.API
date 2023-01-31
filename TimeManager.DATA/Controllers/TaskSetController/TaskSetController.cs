@@ -14,7 +14,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
         public TaskSetController(IProcessors processors) => _processors = processors;
 
         [HttpPost(Name = "GetTaskSetById")]
-        public async Task<IActionResult> GetById(Request<int> request)
+        public async Task<IActionResult> GetById(Request<Guid> request)
         {
             var processor = _processors.taskSet_GetById;
             if(processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));

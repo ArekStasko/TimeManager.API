@@ -3,6 +3,7 @@ using TimeManager.DATA.Controllers.TaskControllers;
 using TimeManager.DATA.Processors.TaskProcessor.Interfaces;
 using TimeManager.DATA.Services.MessageQueuer;
 using LanguageExt.Common;
+using TimeManager.DATA.Data.DTO;
 
 namespace TimeManager.DATA.Processors.TaskProcessor
 {
@@ -10,7 +11,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_Update(DataContext context, ILogger<TaskController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<Result<bool>> Execute(Request<Task_> request)
+        public async Task<Result<bool>> Execute(Request<TaskDTO> request)
         {
             try
             {

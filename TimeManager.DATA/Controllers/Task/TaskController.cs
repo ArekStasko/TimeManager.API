@@ -2,6 +2,7 @@
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Services.Container;
 using LanguageExt.Common;
+using TimeManager.DATA.Data.DTO;
 
 namespace TimeManager.DATA.Controllers.TaskControllers
 {
@@ -35,7 +36,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         }
 
         [HttpPost(Name = "GetTaskById")]
-        public async Task<IActionResult> GetById(Request<int> request)
+        public async Task<IActionResult> GetById(Request<Guid> request)
         {
             var processor = _processors.task_GetById;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
@@ -52,7 +53,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         }
 
         [HttpPost(Name = "PostTask")]
-        public async Task<IActionResult> Post(Request<Task_> request)
+        public async Task<IActionResult> Post(Request<TaskDTO> request)
         {
             var processor = _processors.task_Post;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
@@ -70,7 +71,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         }
 
         [HttpDelete(Name = "DeleteTask")]
-        public async Task<IActionResult> Delete(Request<int> request)
+        public async Task<IActionResult> Delete(Request<Guid> request)
         {
 
             var processor = _processors.task_Delete;
@@ -88,7 +89,7 @@ namespace TimeManager.DATA.Controllers.TaskControllers
         }
 
         [HttpPost(Name = "UpdateTask")]
-        public async Task<IActionResult> Update(Request<Task_> request)
+        public async Task<IActionResult> Update(Request<TaskDTO> request)
         {
             var processor = _processors.task_Update;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
