@@ -10,7 +10,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
     {
         public Task_GetById(DataContext context, ILogger<TaskController> logger) : base(context, logger) { }
 
-        public async Task<Result<Task_>> Execute(Guid taskId, int userId)
+        public async Task<Result<Task_>> Execute(Guid taskId, Guid userId)
         {
             try
             {

@@ -9,7 +9,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
     {
         public TaskSet_GetAll(DataContext context, ILogger<TaskSetController> logger) : base(context, logger) { }
 
-        public async Task<Result<List<TaskSet>>> Execute(int userId)
+        public async Task<Result<List<TaskSet>>> Execute(Guid userId)
         {
             try
             {

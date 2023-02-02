@@ -15,7 +15,7 @@ namespace TimeManager.DATA.Processors.TaskProcessor
         {
             try
             {
-                var task = _context.Tasks.Single(act => act.Id == request.Data.Id);
+                var task = _context.Tasks.Single(tsk => tsk.Id == request.Data.Id);
                 
                 task.Name = request.Data.Name;
                 task.Description = request.Data.Description;

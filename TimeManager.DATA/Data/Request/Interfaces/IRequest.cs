@@ -3,7 +3,7 @@
     public interface IRequest<T>
     {
         public T Data { get; set; }
-        public int userId { get; set; }
+        public Guid userId { get; set; }
 
     }
 }

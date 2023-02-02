@@ -10,7 +10,7 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
     {
         public TaskSet_Delete(DataContext context, ILogger<TaskSetController> logger, IMQManager mqManager) : base(context, logger, mqManager) { }
 
-        public async Task<Result<bool>> Execute(Guid taskSetId, int userId)
+        public async Task<Result<bool>> Execute(Guid taskSetId, Guid userId)
         {
             try
             {

@@ -22,21 +22,21 @@ namespace TimeManager.DATA.Processors.TaskProcessor
                 task.UserId = request.userId;
 
                 _context.Tasks.Add(task);
-                _context.SaveChanges();
-                
+                Console.WriteLine($"ADDED TASK: {task.UserId} - {task.Id}");
                 bool succ = _mqManager.Publish(
                     task,
                     "entity.task.post",
                     "direct",
                     "task_Post"
                 );
+                Console.WriteLine($"SUCC: {succ}");
 
-                if (!succ)
-                {
-                    _context.Tasks.Remove(task);
-                    _context.SaveChanges();
-                    return new Result<bool>(false);
-                }
+                if (!succ) return new Result<bool>(false);
+                
+                Console.WriteLine($"SAVING CHANGES");
+
+                _context.SaveChanges();
+                Console.WriteLine($"CHANGES SAVED");
 
                 _logger.LogInformation("Successfully completed Task_Post processor execution");
                 return new Result<bool>(true);

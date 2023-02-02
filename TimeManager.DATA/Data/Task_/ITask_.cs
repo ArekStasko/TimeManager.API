@@ -10,7 +10,7 @@
         DateTime DateCompleted { get; set; }
         DateTime Deadline { get; set; }
         int Priority { get; set; }
-        int UserId { get; set; }
+        Guid UserId { get; set; }
         bool Completed { get; set; }
     }
 }
