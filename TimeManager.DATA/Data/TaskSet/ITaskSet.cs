@@ -8,7 +8,7 @@ namespace TimeManager.DATA.Data
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
+        public Guid TaskId { get; set; }
         public List<TaskDate> TaskOccurencies { get; set; }
-        public Task_ Task { get; set; }
     }
 }

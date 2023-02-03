@@ -10,6 +10,6 @@ public class TaskDTO
     public DateTime DateCompleted { get; set; }
     public DateTime Deadline { get; set; }
     public int Priority { get; set; }
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public bool Completed { get; set; } = false;
 }

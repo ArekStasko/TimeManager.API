@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data;
+using TimeManager.DATA.Data.DTO;
 using TimeManager.DATA.Services.Container;
 
 namespace TimeManager.DATA.Controllers.TaskSetControllers
@@ -47,7 +48,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
         }
 
         [HttpPost(Name = "DeleteTaskSet")]
-        public async Task<IActionResult> Delete(Request<TaskSet> request)
+        public async Task<IActionResult> Delete(Request<TaskSetDTO> request)
         {
             var processor = _processors.taskSet_Delete;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
@@ -64,7 +65,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
         }
 
         [HttpPost(Name = "PostTaskSet")]
-        public async Task<IActionResult> Post(Request<TaskSet> request)
+        public async Task<IActionResult> Post(Request<TaskSetDTO> request)
         {
             var processor = _processors.taskSet_Post;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
@@ -81,7 +82,7 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
         }
 
         [HttpPost(Name = "UpdateTaskSet")]
-        public async Task<IActionResult> Update(Request<TaskSet> request)
+        public async Task<IActionResult> Update(Request<TaskSetDTO> request)
         {
             var processor = _processors.taskSet_Update;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));

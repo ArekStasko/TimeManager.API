@@ -1,11 +1,12 @@
 ﻿using LanguageExt.Common;
 using Microsoft.AspNetCore.Mvc;
 using TimeManager.DATA.Data;
+using TimeManager.DATA.Data.DTO;
 
 namespace TimeManager.DATA.Processors.TaskSetProcessor
 {
     public interface ITaskSet_Post
     {
-        public Task<Result<bool>> Execute(Request<TaskSet> request);
+        public Task<Result<bool>> Execute(Request<TaskSetDTO> request);
     }
 }

@@ -29,7 +29,8 @@ namespace TimeManager.DATA.Services.ContainerGenerator
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name))
                 .WithParameter(new TypedParameter(typeof(DataContext), _context))
                 .WithParameter(new TypedParameter(typeof(ILogger<TaskSetController>), _taskSetLogger))
-                .WithParameter(new TypedParameter(typeof(IMQManager), _mqManager));
+                .WithParameter(new TypedParameter(typeof(IMQManager), _mqManager))
+                .WithParameter(new TypedParameter(typeof(IMapper), _mapper));
 
 
             return container.Build();

@@ -12,5 +12,10 @@ public class AutoMapperProfile : Profile
             .ForMember(tsk => tsk.UserId, opt => opt.Ignore())
             .ForMember(tsk => tsk.Id, opt => opt.Ignore())
             .ForSourceMember(dto => dto.UserId, opt => opt.DoNotValidate());
+
+        CreateMap<TaskSetDTO, TaskSet>()
+            .ForMember(tsk => tsk.UserId, opt => opt.Ignore())
+            .ForMember(tsk => tsk.Id, opt => opt.Ignore())
+            .ForSourceMember(dto => dto.UserId, opt => opt.DoNotValidate());
     }
 }
