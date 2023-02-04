@@ -47,13 +47,13 @@ namespace TimeManager.DATA.Controllers.TaskSetControllers
             });
         }
 
-        [HttpPost(Name = "DeleteTaskSet")]
-        public async Task<IActionResult> Delete(Request<TaskSetDTO> request)
+        [HttpDelete(Name = "DeleteTaskSet")]
+        public async Task<IActionResult> Delete(Request<Guid> request)
         {
             var processor = _processors.taskSet_Delete;
             if (processor == null) return BadRequest(new ArgumentNullException(nameof(processor)));
 
-            var result = await processor.Execute(request.Data.Id, request.userId);
+            var result = await processor.Execute(request.Data, request.userId);
 
             return result.Match<IActionResult>(success =>
             {

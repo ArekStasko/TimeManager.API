@@ -18,9 +18,9 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
             {
                 var taskSet = _context.TaskSets.Single(tsk => tsk.Id == request.Data.Id);
                 var newTaskSet = _mapper.Map<TaskSet>(request.Data);
-                _context.TaskSets.Remove(taskSet);
-                _context.TaskSets.Add(newTaskSet);
-
+                
+                taskSet.TaskOccurencies = newTaskSet.TaskOccurencies;
+                
                 bool succ = _mqManager.Publish(
                    taskSet,
                    "entity.taskSet.update",

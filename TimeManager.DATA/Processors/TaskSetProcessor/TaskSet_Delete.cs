@@ -1,5 +1,6 @@
 ﻿using LanguageExt.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TimeManager.DATA.Controllers.TaskSetControllers;
 using TimeManager.DATA.Data;
 using TimeManager.DATA.Services.MessageQueuer;
@@ -14,11 +15,15 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
         {
             try
             {
-                var taskSet = _context.TaskSets.Single(tsk => tsk.Id == taskSetId && tsk.UserId == userId);
+                var taskSetRecord = _context.TaskSets.Single(tsk => tsk.Id == taskSetId && tsk.UserId == userId);
+
+                var toDelete = _context.TaskSets.OrderBy(e => e.Id).Include(e => e.TaskOccurencies);
+                var taskSet = toDelete.Single(tsk => tsk.Id == taskSetId && tsk.UserId == userId);
+                
                 _context.TaskSets.Remove(taskSet);
 
                 bool succ = _mqManager.Publish(
-                   taskSet,
+                   taskSetRecord,
                    "entity.taskSet.delete",
                    "direct",
                    "taskSet_Delete"
