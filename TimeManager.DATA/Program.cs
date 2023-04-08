@@ -5,7 +5,17 @@ using Serilog;
 using TimeManager.DATA.Services.MessageQueuer;
 using TimeManager.DATA.Services.Container;
 
+const string AllowSpecifiOrigin = "AllowSpecifiOrigin";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecifiOrigin, policy => policy.WithOrigins("http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
 
 // Add services to the container.
 
