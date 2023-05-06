@@ -13,8 +13,8 @@ namespace TimeManager.DATA.Processors.TaskSetProcessor
 
         public async Task<Result<bool>> Execute(Guid taskSetId, Guid userId)
         {
-            try
-            {
+            try{
+
                 var taskSetRecord = _context.TaskSets.Single(tsk => tsk.Id == taskSetId && tsk.UserId == userId);
 
                 var toDelete = _context.TaskSets.OrderBy(e => e.Id).Include(e => e.TaskOccurencies);
